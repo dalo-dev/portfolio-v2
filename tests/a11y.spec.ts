@@ -4,13 +4,7 @@ import AxeBuilder from '@axe-core/playwright';
 // Static end state: no boot overlay or pending reveals while axe inspects the page.
 test.use({ reducedMotion: 'reduce' });
 
-const routes = [
-	'/',
-	'/es/',
-	'/projects/birthdays-hub/',
-	'/es/projects/birthdays-hub/',
-	'/404',
-];
+const routes = ['/', '/es/', '/projects/birthdays-hub/', '/es/projects/birthdays-hub/', '/404'];
 
 for (const route of routes) {
 	test(`${route} has no detectable a11y violations`, async ({ page }) => {

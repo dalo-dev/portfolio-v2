@@ -32,4 +32,11 @@ export default defineConfig({
 			fallbacks: ['ui-monospace', 'monospace'],
 		},
 	],
+	vite: {
+		optimizeDeps: {
+			// GSAP is only reached through a dynamic import, so Vite would discover it mid-session,
+			// re-optimize and 504 the open page's requests. Pre-bundle it up front instead.
+			include: ['gsap', 'gsap/ScrollTrigger', 'gsap/ScrambleTextPlugin'],
+		},
+	},
 });

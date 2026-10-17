@@ -1,7 +1,5 @@
----
 title: Birthdays Hub
 summary: Una aplicación web para registrar los cumpleaños de tus amigos en un calendario y nunca olvidar ninguno. Agrega contactos y visualiza los próximos cumpleaños.
 stack: [React, TypeScript, Tailwind CSS, Express]
 live: https://birthdayshub.com/
 order: 1
----

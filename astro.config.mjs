@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import securityHeaders from './integrations/security-headers.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,6 +21,7 @@ export default defineConfig({
 				locales: { en: 'en', es: 'es' },
 			},
 		}),
+		securityHeaders(),
 	],
 	fonts: [
 		{

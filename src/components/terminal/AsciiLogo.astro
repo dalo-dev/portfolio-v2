@@ -1,4 +1,6 @@
 ---
+import { asciiLogo } from '../../data/ascii-logo';
+
 interface Props {
 	/** Accessible name; omit when the art is decorative. */
 	label?: string;
@@ -12,26 +14,7 @@ const a11y: Record<string, string> = label
 	? { role: 'img', 'aria-label': label }
 	: { 'aria-hidden': 'true' };
 
-// Generated from the logo mark (40 cols, ramp " .:-=+*#%@"). Keep the trailing-space-free lines.
-const art = String.raw`.----------------- --------------:
-*@@@@@@@@@@@@@@@#:.@@@@@@@@@@@@@@@%-
-*@@@@@@@@@@@@@*:   @@@@@@@@@@@@@@@@@%=
-*@@@@@@@@@@@*:     @@@@@@@##@@@@@@@@@@%-
-*@@@@@@@@@*.      .@@@@@*:  :#@@@@@@@@@*
-*@@@@@@@+.      .+%@@@%.      :*@@@@@@@+
-*@@@@@+.      .+@@@@@@@#-       :*@@@@@*
-*@@@+.      :*@@@@@@@@@@@#-       .+@@@*
-*@+.      :*@@@@@@@@@@@@@@@%-       .+@*
-=.       =@@@@@@@@@@@@@@@@@@@#.       :+
-*%=       :*@@@@@@@@@@@@@@@%=.      .+@*
-*@@%=       :*@@@@@@@@@@@%=       .+@@@*
-*@@@@%=       .*@@@@@@@#-       :*@@@@@*
-*@@@@@@%=       .+@@@@@:      :#@@@@@@@*
-*@@@@@@@@@+.      .@@@@@#-  -#@@@@@@@@@*
-*@@@@@@@@@@@+.     @@@@@@@%#@@@@@@@@@@%-
-*@@@@@@@@@@@@@*.   @@@@@@@@@@@@@@@@@%=
-*@@@@@@@@@@@@@@@#: @@@@@@@@@@@@@@@#-
-:----------------- :-------------:`;
+const art = asciiLogo;
 ---
 
 <pre
@@ -43,7 +26,8 @@ const art = String.raw`.----------------- --------------:
 <style>
 	.ascii-logo {
 		font-family: inherit;
-		font-size: clamp(0.4375rem, 0.25rem + 0.8vw, 0.8125rem);
+		/* ≥12px keeps it legible (and fits 40 cols on a 320px screen). */
+		font-size: clamp(0.75rem, 0.6rem + 0.4vw, 0.8125rem);
 		line-height: 1.12;
 		color: var(--color-accent);
 		text-shadow: var(--glow);

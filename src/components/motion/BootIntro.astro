@@ -70,11 +70,11 @@ const log = [
 		gap: var(--space-12) 6rem;
 		padding: var(--gutter);
 		background: var(--color-bg-sunken);
-		animation: boot-out 450ms ease 2.4s forwards;
+		animation: boot-out 400ms steps(10, end) 2.4s forwards;
 	}
 
 	:global(html.boot-skip) .boot {
-		animation: boot-out 150ms ease forwards;
+		animation: boot-out 150ms steps(4, end) forwards;
 	}
 
 	.boot__text {
@@ -154,9 +154,10 @@ const log = [
 		}
 	}
 
+	/* A stepped "clear" wipe rather than a fade: text is never shown at partial contrast. */
 	@keyframes boot-out {
 		to {
-			opacity: 0;
+			clip-path: inset(0 0 100% 0);
 			visibility: hidden;
 		}
 	}

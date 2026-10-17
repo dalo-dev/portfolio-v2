@@ -33,7 +33,7 @@ const education = defineCollection({
 });
 
 const projects = defineCollection({
-	loader: glob({ pattern: '*/*.md', base: './src/content/projects' }),
+	loader: glob({ pattern: '*/*.yaml', base: './src/content/projects' }),
 	schema: z.object({
 		title: z.string(),
 		summary: z.string(),

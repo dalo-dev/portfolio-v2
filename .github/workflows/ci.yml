@@ -22,3 +22,5 @@ jobs:
       - run: pnpm build
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e
+      - name: Lighthouse (mobile, ≥95 perf/best-practices, 100 a11y/SEO)
+        run: pnpm lighthouse

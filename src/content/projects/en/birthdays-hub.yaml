@@ -1,7 +1,5 @@
----
 title: Birthdays Hub
 summary: A web app to track your friends' birthdays on a calendar so you never miss one. Add contacts and get a clear view of upcoming celebrations.
 stack: [React, TypeScript, Tailwind CSS, Express]
 live: https://birthdayshub.com/
 order: 1
----

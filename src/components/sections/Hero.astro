@@ -94,8 +94,9 @@ const t = useTranslations(lang);
 		min-width: 0;
 	}
 
+	/* No side padding: the centered art needs every pixel of a 320px screen. */
 	.hero__art {
-		padding: var(--space-6) var(--space-4);
+		padding: var(--space-6) 0;
 		overflow: hidden;
 	}
 </style>

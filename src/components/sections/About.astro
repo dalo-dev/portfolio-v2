@@ -1,7 +1,9 @@
 ---
 import { Picture } from 'astro:assets';
 import Section from '../Section.astro';
+import Prompt from '../terminal/Prompt.astro';
 import TerminalWindow from '../terminal/TerminalWindow.astro';
+import { spokenLanguages } from '../../data/site';
 import profilePhoto from '../../assets/images/me.jpg';
 import type { Lang } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
@@ -29,6 +31,31 @@ const t = useTranslations(lang);
 		<p>{t('about.p1')}</p>
 		<p>{t('about.p2')}</p>
 	</div>
+	<div class="locales">
+		<h3 class="visually-hidden">{t('about.languages')}</h3>
+		<Prompt command="locale -a" />
+		<dl class="locales__list">
+			{spokenLanguages.map((language) => (
+				<div class="locales__row">
+					<dt class="locales__name">
+						<span class="locales__code" aria-hidden="true">
+							{language.locale}
+						</span>
+						{t(language.name)}
+					</dt>
+					<dd class="locales__level">
+						{t(language.level)}
+						{'certificate' in language && (
+							<span class="locales__cert">
+								{' · '}
+								{language.certificate.name} <strong>{language.certificate.score}</strong>
+							</span>
+						)}
+					</dd>
+				</div>
+			))}
+		</dl>
+	</div>
 </Section>
 
 <style>
@@ -37,6 +64,53 @@ const t = useTranslations(lang);
 		flex-direction: column;
 		gap: var(--space-4);
 		max-width: var(--prose-max);
+	}
+
+	.locales {
+		margin-top: var(--space-8);
+		max-width: var(--prose-max);
+		font-size: var(--text-sm);
+	}
+
+	.locales__list {
+		margin-top: var(--space-2);
+	}
+
+	/* Aligned columns like real `locale -a` output; the code column hides on narrow screens. */
+	.locales__row {
+		display: grid;
+		grid-template-columns: 24ch minmax(0, 1fr);
+		column-gap: var(--space-4);
+		padding-block: var(--space-1);
+	}
+
+	.locales__code {
+		display: inline-block;
+		width: 15ch;
+		color: var(--color-muted);
+	}
+
+	.locales__name {
+		color: var(--color-heading);
+	}
+
+	.locales__cert {
+		white-space: nowrap;
+	}
+
+	.locales__cert strong {
+		color: var(--color-accent);
+		font-weight: 700;
+	}
+
+	@media (max-width: 30rem) {
+		.locales__row {
+			grid-template-columns: 9ch minmax(0, 1fr);
+		}
+
+		.locales__code {
+			display: none;
+		}
 	}
 
 	:global(.about__photo) {

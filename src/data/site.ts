@@ -15,6 +15,17 @@ export const cv: Record<Lang, string> = {
 	es: '/cv/CV_ES.pdf',
 };
 
+/** Spoken languages, shown as `locale -a` output in About. Labels live in src/i18n/ui.ts. */
+export const spokenLanguages = [
+	{ locale: 'es_CO.UTF-8', name: 'lang.spanish', level: 'lang.native' },
+	{
+		locale: 'en_US.UTF-8',
+		name: 'lang.english',
+		level: 'lang.professional',
+		certificate: { name: 'TOEFL iBT', score: '94/120' },
+	},
+] as const;
+
 /** Section anchors, shared by the nav and the home page. */
 export const sections = [
 	'about',

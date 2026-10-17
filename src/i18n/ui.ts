@@ -45,6 +45,11 @@ const en = {
 	'about.p2':
 		'I specialize in translating complex business requirements into intuitive digital solutions while maintaining a quality-first approach throughout the software development lifecycle. I thrive in agile environments where technical excellence and system reliability are the core priorities.',
 	'about.photo.alt': 'Portrait of Daniel León',
+	'about.languages': 'Languages',
+	'lang.spanish': 'Spanish',
+	'lang.english': 'English',
+	'lang.native': 'native',
+	'lang.professional': 'professional working proficiency',
 	'now.title': 'Now',
 	'now.updated': 'last updated',
 	'experience.title': 'Experience',
@@ -126,6 +131,11 @@ const es: Record<UIKey, string> = {
 	'about.p2':
 		'Me especializo en traducir requisitos de negocio complejos en soluciones digitales intuitivas, manteniendo un enfoque de calidad ante todo a lo largo del ciclo de vida del desarrollo de software. Prospero en entornos ágiles donde la excelencia técnica y la confiabilidad del sistema son las prioridades fundamentales.',
 	'about.photo.alt': 'Retrato de Daniel León',
+	'about.languages': 'Idiomas',
+	'lang.spanish': 'Español',
+	'lang.english': 'Inglés',
+	'lang.native': 'nativo',
+	'lang.professional': 'competencia profesional',
 	'now.title': 'Ahora',
 	'now.updated': 'última actualización',
 	'experience.title': 'Experiencia',

@@ -10,8 +10,9 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const facts = [
 	[t('status.uptime'), t('status.uptime.value')],
+	[t('status.users'), t('status.users.value')],
+	[t('status.honors'), t('status.honors.value')],
 	[t('status.loc'), t('status.loc.value')],
-	[t('status.langs'), t('status.langs.value')],
 ] as const;
 ---
 

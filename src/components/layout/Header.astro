@@ -22,7 +22,7 @@ const home = localizePath(lang);
 				dalo<span class="brand__tld">.dev</span>
 			</span>
 		</a>
-		<nav class="header__nav" aria-label={t('nav.label')}>
+		<nav class="header__nav" id="site-nav" aria-label={t('nav.label')}>
 			<ul class="nav">
 				{sections.map((id) => (
 					<li>
@@ -34,12 +34,88 @@ const home = localizePath(lang);
 				))}
 			</ul>
 		</nav>
-		<LanguageSwitcher lang={lang} />
+		<div class="header__end">
+			<LanguageSwitcher lang={lang} />
+			<!-- Narrow screens only; stays hidden without JS, where the nav is simply always shown. -->
+			<button
+				type="button"
+				class="menu-btn"
+				aria-expanded="false"
+				aria-controls="site-nav"
+				data-menu-toggle
+				hidden
+			>
+				<span class="menu-btn__icon" aria-hidden="true"></span>
+				{t('nav.menu')}
+			</button>
+		</div>
 	</div>
 </header>
 
+<script>
+	/** Mobile menu: a disclosure button for #site-nav. Re-wired after each client-router swap. */
+	const NARROW = '(max-width: 63.99rem)';
+	let controller: AbortController | undefined;
+
+	function initMenu() {
+		controller?.abort();
+		controller = new AbortController();
+		const { signal } = controller;
+
+		const button = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+		const nav = document.getElementById('site-nav');
+		if (!button || !nav) return;
+		button.hidden = false;
+
+		const isOpen = () => button.getAttribute('aria-expanded') === 'true';
+		const setOpen = (open: boolean) => {
+			button.setAttribute('aria-expanded', String(open));
+			nav.classList.toggle('is-open', open);
+		};
+
+		button.addEventListener('click', () => setOpen(!isOpen()), { signal });
+		// Following a link closes the menu (same-page anchors don't reload the header).
+		nav.addEventListener(
+			'click',
+			(e) => {
+				if ((e.target as Element).closest('a')) setOpen(false);
+			},
+			{ signal },
+		);
+		document.addEventListener(
+			'keydown',
+			(e) => {
+				if (e.key === 'Escape' && isOpen()) {
+					setOpen(false);
+					button.focus();
+				}
+			},
+			{ signal },
+		);
+		document.addEventListener(
+			'pointerdown',
+			(e) => {
+				if (isOpen() && !(e.target as Element).closest('.header')) setOpen(false);
+			},
+			{ signal },
+		);
+		matchMedia(NARROW).addEventListener(
+			'change',
+			(e) => {
+				if (!e.matches) setOpen(false);
+			},
+			{ signal },
+		);
+	}
+
+	document.addEventListener('astro:page-load', initMenu);
+	document.addEventListener('astro:before-swap', () => controller?.abort());
+</script>
+
 <style>
 	.header {
+		position: relative;
+		z-index: 10;
 		background: var(--color-bg-sunken);
 		border-bottom: 1px solid var(--color-border);
 	}
@@ -73,6 +149,12 @@ const home = localizePath(lang);
 		color: var(--color-muted);
 	}
 
+	.header__end {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+	}
+
 	.nav {
 		list-style: none;
 		padding: 0;
@@ -95,12 +177,75 @@ const home = localizePath(lang);
 		text-decoration: underline;
 	}
 
-	/* On narrow screens the nav drops to its own row under brand + language. */
-	@media (max-width: 47.99rem) {
+	.menu-btn {
+		display: none;
+		align-items: center;
+		gap: var(--space-2);
+		min-height: var(--target-min);
+		padding-inline: var(--space-3);
+		border: 1px solid var(--color-border-strong);
+		border-radius: var(--radius);
+		background: transparent;
+		color: var(--color-heading);
+		font-size: var(--text-sm);
+		cursor: pointer;
+	}
+
+	.menu-btn:hover {
+		border-color: var(--color-muted);
+	}
+
+	.menu-btn__icon::before {
+		content: '[≡]';
+		color: var(--color-accent);
+	}
+
+	.menu-btn[aria-expanded='true'] .menu-btn__icon::before {
+		content: '[×]';
+	}
+
+	@media (max-width: 63.99rem) {
 		.header__nav {
 			order: 3;
 			flex-basis: 100%;
-			padding-bottom: var(--space-2);
+		}
+
+		.menu-btn:not([hidden]) {
+			display: inline-flex;
+		}
+
+		/* With JS the nav collapses behind the menu button; without it, it stays inline. */
+		:global(html.js) .header__nav:not(.is-open) {
+			display: none;
+		}
+
+		:global(html.js) .header__nav.is-open {
+			padding-block: var(--space-2) var(--space-4);
+			border-top: 1px dashed var(--color-border);
+			margin-top: var(--space-1);
+		}
+
+		:global(html.js) .header__nav.is-open .nav {
+			flex-direction: column;
+		}
+
+		:global(html.js) .header__nav.is-open .nav a {
+			min-height: var(--target-min);
+			font-size: var(--text-base);
+		}
+
+		:global(html.motion-on) .header__nav.is-open {
+			animation: menu-print 220ms steps(6, end);
+		}
+	}
+
+	@keyframes menu-print {
+		from {
+			clip-path: inset(0 0 100% 0);
+		}
+
+		to {
+			clip-path: inset(0);
 		}
 	}
 </style>

@@ -14,6 +14,7 @@ const en = {
 	'skip.link': 'Skip to content',
 
 	'nav.label': 'Primary',
+	'nav.menu': 'menu',
 	'nav.about': 'about',
 	'nav.now': 'now',
 	'nav.experience': 'experience',
@@ -33,11 +34,13 @@ const en = {
 
 	'status.label': 'Quick facts',
 	'status.uptime': 'uptime',
-	'status.uptime.value': 'shipping frontend since 2022',
+	'status.uptime.value': 'frontend since 2022',
+	'status.users': 'users',
+	'status.users.value': '20,000+ students / semester',
+	'status.honors': 'honors',
+	'status.honors.value': 'Cum Laude',
 	'status.loc': 'loc',
 	'status.loc.value': 'Colombia',
-	'status.langs': 'langs',
-	'status.langs.value': 'es · en',
 
 	'about.title': 'About',
 	'about.p1':
@@ -99,6 +102,7 @@ const es: Record<UIKey, string> = {
 	'skip.link': 'Saltar al contenido',
 
 	'nav.label': 'Principal',
+	'nav.menu': 'menú',
 	'nav.about': 'sobre-mi',
 	'nav.now': 'ahora',
 	'nav.experience': 'experiencia',
@@ -119,11 +123,13 @@ const es: Record<UIKey, string> = {
 
 	'status.label': 'Datos rápidos',
 	'status.uptime': 'uptime',
-	'status.uptime.value': 'construyendo frontend desde 2022',
+	'status.uptime.value': 'frontend desde 2022',
+	'status.users': 'usuarios',
+	'status.users.value': '20.000+ estudiantes / semestre',
+	'status.honors': 'distinción',
+	'status.honors.value': 'Cum Laude',
 	'status.loc': 'loc',
 	'status.loc.value': 'Colombia',
-	'status.langs': 'idiomas',
-	'status.langs.value': 'es · en',
 
 	'about.title': 'Sobre mí',
 	'about.p1':

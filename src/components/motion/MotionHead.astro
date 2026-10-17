@@ -15,6 +15,7 @@
 			} catch {}
 			const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 			const on = !paused && !reduce;
+			root.classList.add('js');
 			root.classList.toggle('motion-on', on);
 			root.classList.toggle('motion-off', !on);
 			root.classList.toggle('motion-reduced', reduce);

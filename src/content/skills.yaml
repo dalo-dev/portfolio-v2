@@ -1,9 +1,42 @@
-- id: structure-and-styling
+# Grouped like the GitHub profile README. `icon` is a Simple Icons slug (https://simpleicons.org).
+# Group labels are translated in src/i18n/ui.ts (`skills.<id>`).
+- id: core
   order: 1
-  items: [HTML5, CSS3, Tailwind CSS, SASS, shadcn/ui]
-- id: frameworks-and-languages
+  items:
+    - { name: TypeScript, icon: typescript }
+    - { name: JavaScript, icon: javascript }
+    - { name: HTML5, icon: html5 }
+    - { name: CSS, icon: css }
+- id: frameworks-and-libraries
   order: 2
-  items: [JavaScript, TypeScript, React, Angular, React Router, Axios]
-- id: development-and-workflow
+  items:
+    - { name: React, icon: react }
+    - { name: React Router, icon: reactrouter }
+    - { name: Angular, icon: angular }
+- id: styling-and-ui
   order: 3
-  items: [Git, GitHub, GitLab, npm, pnpm, Bun, Vite, Prettier, Vitest, Vercel]
+  items:
+    - { name: Tailwind CSS, icon: tailwindcss }
+    - { name: Sass, icon: sass }
+    - { name: shadcn/ui, icon: shadcnui }
+    - { name: Framer Motion, icon: framer }
+- id: tooling-and-testing
+  order: 4
+  items:
+    - { name: Vite, icon: vite }
+    - { name: Vitest, icon: vitest }
+    - { name: Bun, icon: bun }
+    - { name: ESLint, icon: eslint }
+    - { name: Git, icon: git }
+    - { name: GitLab, icon: gitlab }
+    - { name: Vercel, icon: vercel }
+- id: linux-and-self-hosting
+  order: 5
+  items:
+    - { name: Linux, icon: linux }
+    - { name: Bash, icon: gnubash }
+    - { name: Docker, icon: docker }
+- id: ai-tools
+  order: 6
+  items:
+    - { name: Claude Code, icon: claudecode }

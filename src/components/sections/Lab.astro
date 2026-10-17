@@ -13,11 +13,11 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const { machines, rice, ask } = await getLab(lang);
-// neofetch's colour blocks, in the site palette (minus the window's own background).
+// fastfetch's colour blocks, in the site palette (minus the window's own background).
 const swatches = ['#161a20', '#262b33', '#5d6672', '#9aa3ae', '#c3c8cf', '#e6e8eb', '#6fb3b8'];
 ---
 
-<Section id="lab" title={t('lab.title')} command="neofetch">
+<Section id="lab" title={t('lab.title')} command="fastfetch">
 	<div class="lab">
 		{machines.map((machine) => (
 			<TerminalWindow title={machine.command} class="lab__machine" data-reveal-item>

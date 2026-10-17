@@ -62,7 +62,7 @@ const now = defineCollection({
 	}),
 });
 
-/** The machines I run, shown as `neofetch` output: `lab/<lang>/lab.yaml`. */
+/** The machines I run, shown as `fastfetch` output: `lab/<lang>/lab.yaml`. */
 const lab = defineCollection({
 	loader: glob({ pattern: '*/lab.yaml', base: './src/content/lab' }),
 	schema: z.object({
@@ -87,9 +87,24 @@ const lab = defineCollection({
 const skills = defineCollection({
 	loader: file('src/content/skills.yaml'),
 	schema: z.object({
-		id: z.enum(['structure-and-styling', 'frameworks-and-languages', 'development-and-workflow']),
+		id: z.enum([
+			'core',
+			'frameworks-and-libraries',
+			'styling-and-ui',
+			'tooling-and-testing',
+			'linux-and-self-hosting',
+			'ai-tools',
+		]),
 		order: z.number().int(),
-		items: z.array(z.string()).min(1),
+		items: z
+			.array(
+				z.object({
+					name: z.string(),
+					/** Simple Icons slug; validated when the page renders (src/lib/icons.ts). */
+					icon: z.string(),
+				}),
+			)
+			.min(1),
 	}),
 });
 

@@ -1,8 +1,8 @@
-# Rendered as `neofetch` output. Keys stay in English like the real tool; `role` and service
+# Rendered as `fastfetch` output. Keys stay in English like the real tool; `role` and service
 # descriptions are translated per language.
 machines:
   - hostname: raider
-    command: neofetch
+    command: fastfetch
     fields:
       - { key: Host, value: MSI GE75 Raider }
       - { key: Role, value: daily driver · work & experiments }
@@ -10,9 +10,9 @@ machines:
       - { key: WM, value: Hyprland }
       - { key: Shell, value: Noctalia }
   - hostname: thinkpad
-    command: ssh thinkpad neofetch
+    command: ssh thinkpad fastfetch
     fields:
-      - { key: Host, value: ThinkPad }
+      - { key: Host, value: ThinkPad T480 }
       - { key: Role, value: homelab · self-hosting & tinkering }
       - { key: OS, value: Ubuntu Server }
     services:

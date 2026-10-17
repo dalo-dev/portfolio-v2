@@ -1,8 +1,8 @@
-# Se muestra como la salida de `neofetch`. Las claves van en inglés como en la herramienta real;
+# Se muestra como la salida de `fastfetch`. Las claves van en inglés como en la herramienta real;
 # `role` y las descripciones de servicios se traducen.
 machines:
   - hostname: raider
-    command: neofetch
+    command: fastfetch
     fields:
       - { key: Host, value: MSI GE75 Raider }
       - { key: Role, value: equipo principal · trabajo y experimentos }
@@ -10,9 +10,9 @@ machines:
       - { key: WM, value: Hyprland }
       - { key: Shell, value: Noctalia }
   - hostname: thinkpad
-    command: ssh thinkpad neofetch
+    command: ssh thinkpad fastfetch
     fields:
-      - { key: Host, value: ThinkPad }
+      - { key: Host, value: ThinkPad T480 }
       - { key: Role, value: homelab · self-hosting y experimentos }
       - { key: OS, value: Ubuntu Server }
     services:

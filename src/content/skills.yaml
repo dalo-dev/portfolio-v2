@@ -1,0 +1,9 @@
+- id: structure-and-styling
+  order: 1
+  items: [HTML5, CSS3, Tailwind CSS, SASS, shadcn/ui]
+- id: frameworks-and-languages
+  order: 2
+  items: [JavaScript, TypeScript, React, Angular, React Router, Axios]
+- id: development-and-workflow
+  order: 3
+  items: [Git, GitHub, GitLab, npm, pnpm, Bun, Vite, Prettier, Vitest, Vercel]

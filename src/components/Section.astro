@@ -1,0 +1,39 @@
+---
+import Prompt from './terminal/Prompt.astro';
+
+interface Props {
+	id: string;
+	title: string;
+	command: string;
+	class?: string;
+}
+
+const { id, title, command, class: className } = Astro.props;
+const headingId = `${id}-title`;
+---
+
+<section id={id} aria-labelledby={headingId} class:list={['section container', className]}>
+	<Prompt command={command} />
+	<h2 id={headingId} class="section__title">
+		<span aria-hidden="true" class="section__hash">
+			#{' '}
+		</span>
+		{title}
+	</h2>
+	<slot />
+</section>
+
+<style>
+	.section {
+		padding-top: var(--space-section);
+	}
+
+	.section__title {
+		margin: var(--space-1) 0 var(--space-8);
+		font-size: var(--text-xl);
+	}
+
+	.section__hash {
+		color: var(--color-muted);
+	}
+</style>

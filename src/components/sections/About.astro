@@ -1,0 +1,28 @@
+---
+import Section from '../Section.astro';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<Section id="about" title={t('about.title')} command="cat about.md">
+	<div class="about">
+		<p>{t('about.p1')}</p>
+		<p>{t('about.p2')}</p>
+	</div>
+</Section>
+
+<style>
+	.about {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-4);
+		max-width: var(--prose-max);
+	}
+</style>

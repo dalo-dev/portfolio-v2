@@ -1,0 +1,46 @@
+---
+import Section from '../Section.astro';
+import TagList from '../ui/TagList.astro';
+import Timeline from '../ui/Timeline.astro';
+import TimelineItem from '../ui/TimelineItem.astro';
+import TreeList from '../ui/TreeList.astro';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+import { getExperience } from '../../lib/content';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const jobs = await getExperience(lang);
+---
+
+<Section id="experience" title={t('experience.title')} command="cat experience.log">
+	<Timeline>
+		{jobs.map(({ data }) => (
+			<TimelineItem start={data.start} end={data.end} presentLabel={t('experience.present')}>
+				<h3 class="job__title">
+					{data.role} <span class="job__at">@</span> {data.company}
+				</h3>
+				<TreeList items={data.highlights} glyph="log" class="job__highlights" />
+				<TagList items={data.stack} label={t('experience.stack')} />
+			</TimelineItem>
+		))}
+	</Timeline>
+</Section>
+
+<style>
+	.job__title {
+		font-size: var(--text-md);
+	}
+
+	.job__at {
+		color: var(--color-muted);
+	}
+
+	:global(.job__highlights) {
+		margin-block: var(--space-3) var(--space-4);
+	}
+</style>

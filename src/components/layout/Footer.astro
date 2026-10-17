@@ -1,0 +1,56 @@
+---
+import { profile } from '../../data/site';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+	<div class="footer__inner container">
+		<p class="statusline" aria-hidden="true">
+			<span class="statusline__mode">{t('footer.mode')}</span>
+			<span>main</span>
+			<span>utf-8</span>
+			<span>{lang}</span>
+		</p>
+		<p class="footer__copy">{`© ${year} ${profile.fullName}. ${t('footer.rights')}`}</p>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		border-top: 1px solid var(--color-border);
+		background: var(--color-bg-sunken);
+		font-size: var(--text-sm);
+		color: var(--color-muted);
+	}
+
+	.footer__inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-2) var(--space-6);
+		padding-block: var(--space-3);
+	}
+
+	.statusline {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 var(--space-4);
+	}
+
+	.statusline__mode {
+		padding-inline: var(--space-2);
+		background: var(--color-accent);
+		color: var(--color-on-solid);
+		font-weight: 700;
+	}
+</style>

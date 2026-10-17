@@ -1,0 +1,46 @@
+---
+interface Props {
+	start: string;
+	end: string | null;
+	presentLabel: string;
+}
+
+const { start, end, presentLabel } = Astro.props;
+---
+
+<li class="item">
+	<p class="item__date">
+		<time datetime={start}>{start}</time>
+		<span aria-hidden="true"> → </span>
+		<span class="visually-hidden"> – </span>
+		{end ? <time datetime={end}>{end}</time> : <span class="item__present">{presentLabel}</span>}
+	</p>
+	<div class="item__body">
+		<slot />
+	</div>
+</li>
+
+<style>
+	.item {
+		padding-left: var(--space-6);
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2) var(--space-8);
+	}
+
+	.item__date {
+		flex: 0 0 12.5rem;
+		color: var(--color-muted);
+		font-size: var(--text-sm);
+		font-variant-numeric: tabular-nums;
+	}
+
+	.item__present {
+		color: var(--color-accent);
+	}
+
+	.item__body {
+		flex: 999 1 26rem;
+		min-width: 0;
+	}
+</style>

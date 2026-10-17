@@ -1,0 +1,91 @@
+---
+import Section from '../Section.astro';
+import Timeline from '../ui/Timeline.astro';
+import TimelineItem from '../ui/TimelineItem.astro';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+import { getEducation } from '../../lib/content';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const studies = await getEducation(lang);
+---
+
+<Section id="education" title={t('education.title')} command="cat education.md">
+	<Timeline>
+		{studies.map(({ data }) => (
+			<TimelineItem start={data.start} end={data.end} presentLabel={t('experience.present')}>
+				<h3 class="edu__degree">{data.degree}</h3>
+				<p class="edu__school">
+					{data.url ? (
+						<a href={data.url} rel="noopener">
+							{data.institution}
+						</a>
+					) : (
+						data.institution
+					)}
+				</p>
+				{(data.gpa || data.honors.length > 0) && (
+					<dl class="edu__meta">
+						{data.gpa && (
+							<div>
+								<dt>{t('education.gpa')}:</dt>
+								<dd class="edu__value">{data.gpa}</dd>
+							</div>
+						)}
+						{data.honors.length > 0 && (
+							<div>
+								<dt>{t('education.honors')}:</dt>
+								<dd class="edu__honors">{data.honors.join(', ')}</dd>
+							</div>
+						)}
+					</dl>
+				)}
+			</TimelineItem>
+		))}
+	</Timeline>
+</Section>
+
+<style>
+	.edu__degree {
+		font-size: var(--text-md);
+	}
+
+	.edu__school {
+		margin-top: var(--space-1);
+	}
+
+	.edu__school a {
+		color: var(--color-text);
+	}
+
+	.edu__school a:hover {
+		color: var(--color-heading);
+	}
+
+	.edu__meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 var(--space-6);
+		margin-top: var(--space-2);
+		font-size: var(--text-sm);
+		color: var(--color-muted);
+	}
+
+	.edu__meta div {
+		display: flex;
+		gap: 0.5ch;
+	}
+
+	.edu__value {
+		color: var(--color-heading);
+	}
+
+	.edu__honors {
+		color: var(--color-accent);
+	}
+</style>

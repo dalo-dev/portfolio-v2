@@ -1,0 +1,9 @@
+company: APL Ingeniería
+role: Practicante de Ingeniería de Sistemas
+start: 2024-11
+end: 2025-04
+highlights:
+  - Desarrollé una plataforma web para el análisis y visualización de indicadores de desempeño bajo Scrumban.
+  - Lideré la implementación frontend de autenticación, gestión de usuarios/roles y dashboards interactivos.
+  - Escribí pruebas unitarias y de componentes con Vitest, Jest y Testing Library.
+stack: [React, TypeScript, shadcn/ui, Tailwind CSS, Vitest, Jest, Testing Library]

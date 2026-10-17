@@ -1,0 +1,52 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
+	title: string;
+}
+
+const { title, class: className, ...rest } = Astro.props;
+---
+
+<div class:list={['window', className]} {...rest}>
+	<div class="window__bar">
+		<span class="window__dot" aria-hidden="true"></span>
+		<span class="window__dot" aria-hidden="true"></span>
+		<span class="window__dot" aria-hidden="true"></span>
+		<span class="window__title">{title}</span>
+	</div>
+	<div class="window__body">
+		<slot />
+	</div>
+</div>
+
+<style>
+	.window {
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		background: var(--color-bg-sunken);
+		overflow: hidden;
+	}
+
+	.window__bar {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		padding: 0.5625rem 0.875rem;
+		border-bottom: 1px solid var(--color-border);
+		background: var(--color-surface);
+	}
+
+	.window__dot {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: var(--color-border-strong);
+	}
+
+	.window__title {
+		margin-left: var(--space-2);
+		font-size: var(--text-xs);
+		color: var(--color-muted);
+	}
+</style>

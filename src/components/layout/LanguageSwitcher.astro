@@ -1,0 +1,75 @@
+---
+import { languages, type Lang } from '../../i18n/ui';
+import { localizePath, stripLangPrefix, useTranslations } from '../../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const path = stripLangPrefix(Astro.url.pathname);
+const langs = Object.keys(languages) as Lang[];
+---
+
+<nav class="lang" aria-label={t('lang.label')}>
+	<ul>
+		{langs.map((code, i) => (
+			<li>
+				{i > 0 && (
+					<span class="lang__sep" aria-hidden="true">
+						/
+					</span>
+				)}
+				{code === lang ? (
+					<a href={localizePath(code, path)} aria-current="page" lang={code}>
+						{code.toUpperCase()}
+					</a>
+				) : (
+					<a href={localizePath(code, path)} hreflang={code} lang={code} title={t('lang.switch')}>
+						<span aria-hidden="true">{code.toUpperCase()}</span>
+						<span class="visually-hidden">{languages[code]}</span>
+					</a>
+				)}
+			</li>
+		))}
+	</ul>
+</nav>
+
+<style>
+	ul {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		font-size: var(--text-sm);
+	}
+
+	li {
+		display: flex;
+		align-items: center;
+	}
+
+	a {
+		display: inline-flex;
+		align-items: center;
+		min-height: var(--target-min);
+		padding-inline: var(--space-2);
+		color: var(--color-muted);
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: var(--color-heading);
+	}
+
+	a[aria-current='page'] {
+		color: var(--color-heading);
+		font-weight: 700;
+		text-decoration: underline;
+	}
+
+	.lang__sep {
+		color: var(--color-faint);
+	}
+</style>

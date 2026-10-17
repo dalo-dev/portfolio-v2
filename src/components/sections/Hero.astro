@@ -1,0 +1,101 @@
+---
+import AsciiLogo from '../terminal/AsciiLogo.astro';
+import Cursor from '../terminal/Cursor.astro';
+import Prompt from '../terminal/Prompt.astro';
+import TerminalWindow from '../terminal/TerminalWindow.astro';
+import { cv, profile } from '../../data/site';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="hero container" aria-labelledby="hero-title">
+	<div class="hero__intro">
+		<Prompt command="whoami" />
+		<h1 id="hero-title" class="hero__name">
+			{profile.name}
+		</h1>
+		<p class="hero__role">{t('hero.role')}</p>
+		<p class="hero__tagline">
+			<span aria-hidden="true" class="hero__gt">
+				&gt;{' '}
+			</span>
+			{t('hero.tagline')}
+			<Cursor />
+		</p>
+		<div class="hero__actions">
+			<a class="btn btn--solid" href="#contact">
+				{t('hero.cta.contact')}
+			</a>
+			<a class="btn btn--outline" href={cv[lang]} download>
+				{t('hero.cta.cv')}
+			</a>
+		</div>
+	</div>
+	<TerminalWindow title="cat logo.txt" class="hero__window">
+		<div class="hero__art">
+			<AsciiLogo label={t('hero.logo.label')} />
+		</div>
+	</TerminalWindow>
+</section>
+
+<style>
+	.hero {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-12) 3.5rem;
+		padding-block: clamp(2.5rem, 1rem + 6vw, 5.5rem) var(--space-12);
+	}
+
+	.hero__intro {
+		flex: 999 1 30rem;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-4);
+	}
+
+	.hero__name {
+		margin-top: var(--space-1);
+		font-size: var(--text-hero);
+		letter-spacing: -0.02em;
+		text-shadow: var(--glow);
+	}
+
+	.hero__role {
+		font-size: var(--text-lg);
+		color: var(--color-accent);
+	}
+
+	.hero__tagline {
+		max-width: 56ch;
+	}
+
+	.hero__gt {
+		color: var(--color-muted);
+	}
+
+	.hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+		margin-top: var(--space-3);
+	}
+
+	.hero :global(.hero__window) {
+		flex: 1 1 22rem;
+		min-width: 0;
+	}
+
+	.hero__art {
+		padding: var(--space-6) var(--space-4);
+		overflow: hidden;
+	}
+</style>

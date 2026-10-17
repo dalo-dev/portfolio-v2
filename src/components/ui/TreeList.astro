@@ -1,0 +1,39 @@
+---
+/** A list rendered with `tree`-style branch glyphs; glyphs are hidden from assistive tech. */
+interface Props {
+	items: readonly string[];
+	glyph?: 'tree' | 'log';
+	class?: string;
+}
+
+const { items, glyph = 'tree', class: className } = Astro.props;
+const [mid, last] = glyph === 'tree' ? ['├── ', '└── '] : ['├─ ', '└─ '];
+---
+
+<ul class:list={['tree', className]}>
+	{items.map((item, i) => (
+		<li>
+			<span class="tree__glyph" aria-hidden="true">
+				{i === items.length - 1 ? last : mid}
+			</span>
+			{item}
+		</li>
+	))}
+</ul>
+
+<style>
+	.tree {
+		list-style: none;
+		padding: 0;
+	}
+
+	.tree li {
+		display: flex;
+	}
+
+	.tree__glyph {
+		flex: none;
+		white-space: pre;
+		color: var(--color-faint);
+	}
+</style>

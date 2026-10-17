@@ -1,0 +1,35 @@
+---
+import Section from '../Section.astro';
+import ProjectCard from '../ui/ProjectCard.astro';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+import { getProjects } from '../../lib/content';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const projects = await getProjects(lang);
+---
+
+<Section id="projects" title={t('projects.title')} command="ls -la ~/projects">
+	<ul class="grid">
+		{projects.map((project) => (
+			<li>
+				<ProjectCard project={project} lang={lang} />
+			</li>
+		))}
+	</ul>
+</Section>
+
+<style>
+	.grid {
+		list-style: none;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+		gap: var(--space-5);
+	}
+</style>

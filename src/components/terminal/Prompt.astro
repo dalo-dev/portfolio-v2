@@ -1,0 +1,33 @@
+---
+import { profile } from '../../data/site';
+
+interface Props {
+	command: string;
+	cwd?: string;
+	class?: string;
+}
+
+const { command, cwd = '~', class: className } = Astro.props;
+const user = `${profile.handle}@${profile.host}`;
+const sep = `:${cwd}$ `;
+---
+
+<!-- Kept on one line: whitespace between these spans is significant. -->
+<!-- prettier-ignore -->
+<p class:list={['prompt', className]} aria-hidden="true"><span class="prompt__user">{user}</span>{sep}<span class="prompt__cmd" data-prompt-cmd>{command}</span></p>
+
+<style>
+	.prompt {
+		color: var(--color-muted);
+		font-size: var(--text-base);
+		overflow-wrap: anywhere;
+	}
+
+	.prompt__user {
+		color: var(--color-accent);
+	}
+
+	.prompt__cmd {
+		color: var(--color-heading);
+	}
+</style>

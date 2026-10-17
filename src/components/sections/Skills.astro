@@ -1,0 +1,51 @@
+---
+import Section from '../Section.astro';
+import TreeList from '../ui/TreeList.astro';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+import { getSkills } from '../../lib/content';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const groups = await getSkills();
+const fileCount = groups.reduce((sum, group) => sum + group.data.items.length, 0);
+---
+
+<Section id="skills" title={t('skills.title')} command="tree ~/skills">
+	<div class="skills">
+		{groups.map(({ data }) => (
+			<div>
+				<h3 class="skills__group">{t(`skills.${data.id}`)}/</h3>
+				<TreeList items={data.items} />
+			</div>
+		))}
+	</div>
+	<p class="skills__summary" aria-hidden="true">
+		{groups.length} directories, {fileCount} files
+	</p>
+</Section>
+
+<style>
+	.skills {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+		gap: var(--space-8);
+		font-size: var(--text-sm);
+	}
+
+	.skills__group {
+		margin-bottom: var(--space-2);
+		font-size: var(--text-base);
+		overflow-wrap: anywhere;
+	}
+
+	.skills__summary {
+		margin-top: var(--space-6);
+		font-size: var(--text-sm);
+		color: var(--color-muted);
+	}
+</style>

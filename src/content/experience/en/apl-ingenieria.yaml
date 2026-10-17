@@ -1,0 +1,9 @@
+company: APL Ingeniería
+role: Systems Engineering Intern
+start: 2024-11
+end: 2025-04
+highlights:
+  - Developed a web platform for performance-indicator analysis and visualization using Scrumban.
+  - Led the frontend implementation of authentication, user/role management and interactive dashboards.
+  - Wrote unit and component tests with Vitest, Jest and Testing Library.
+stack: [React, TypeScript, shadcn/ui, Tailwind CSS, Vitest, Jest, Testing Library]

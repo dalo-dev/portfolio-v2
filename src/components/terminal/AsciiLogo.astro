@@ -1,0 +1,49 @@
+---
+interface Props {
+	label: string;
+	class?: string;
+}
+
+const { label, class: className } = Astro.props;
+
+// Generated from the logo mark (40 cols, ramp " .:-=+*#%@"). Keep the trailing-space-free lines.
+const art = String.raw`.----------------- --------------:
+*@@@@@@@@@@@@@@@#:.@@@@@@@@@@@@@@@%-
+*@@@@@@@@@@@@@*:   @@@@@@@@@@@@@@@@@%=
+*@@@@@@@@@@@*:     @@@@@@@##@@@@@@@@@@%-
+*@@@@@@@@@*.      .@@@@@*:  :#@@@@@@@@@*
+*@@@@@@@+.      .+%@@@%.      :*@@@@@@@+
+*@@@@@+.      .+@@@@@@@#-       :*@@@@@*
+*@@@+.      :*@@@@@@@@@@@#-       .+@@@*
+*@+.      :*@@@@@@@@@@@@@@@%-       .+@*
+=.       =@@@@@@@@@@@@@@@@@@@#.       :+
+*%=       :*@@@@@@@@@@@@@@@%=.      .+@*
+*@@%=       :*@@@@@@@@@@@%=       .+@@@*
+*@@@@%=       .*@@@@@@@#-       :*@@@@@*
+*@@@@@@%=       .+@@@@@:      :#@@@@@@@*
+*@@@@@@@@@+.      .@@@@@#-  -#@@@@@@@@@*
+*@@@@@@@@@@@+.     @@@@@@@%#@@@@@@@@@@%-
+*@@@@@@@@@@@@@*.   @@@@@@@@@@@@@@@@@%=
+*@@@@@@@@@@@@@@@#: @@@@@@@@@@@@@@@#-
+:----------------- :-------------:`;
+---
+
+<pre
+	class:list={['ascii-logo', className]}
+	role="img"
+	aria-label={label}
+	data-ascii-logo
+>{art}</pre>
+
+<style>
+	.ascii-logo {
+		font-family: inherit;
+		font-size: clamp(0.4375rem, 0.25rem + 0.8vw, 0.8125rem);
+		line-height: 1.12;
+		color: var(--color-accent);
+		text-shadow: var(--glow);
+		white-space: pre;
+		width: max-content;
+		margin-inline: auto;
+	}
+</style>

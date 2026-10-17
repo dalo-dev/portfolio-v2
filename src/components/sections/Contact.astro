@@ -1,0 +1,129 @@
+---
+import Section from '../Section.astro';
+import { cv, profile } from '../../data/site';
+import { languages, type Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const strip = (url: string) => url.replace(/^https?:\/\//, '');
+const links = [
+	{ key: 'email', href: `mailto:${profile.email}`, text: profile.email },
+	{ key: 'github', href: profile.github, text: strip(profile.github) },
+	{ key: 'linkedin', href: profile.linkedin, text: strip(profile.linkedin) },
+];
+// Current language's CV first.
+const cvLangs = (Object.keys(cv) as Lang[]).sort((a) => (a === lang ? -1 : 1));
+---
+
+<Section id="contact" title={t('contact.title')} command="./contact.sh" class="contact">
+	<div class="term">
+		<p class="term__status" aria-hidden="true">
+			&gt; {t('contact.connecting')} <span class="term__ok">{t('contact.ok')}</span>
+		</p>
+		<p>{t('contact.subtitle')}</p>
+		<dl class="term__links">
+			{links.map((link) => (
+				<div class="term__row">
+					<dt>{link.key}</dt>
+					<dd>
+						<a href={link.href} rel={link.key === 'email' ? undefined : 'me noopener'}>
+							{link.text}
+						</a>
+					</dd>
+				</div>
+			))}
+		</dl>
+		<ul class="term__cv" aria-label={t('contact.cv')}>
+			{cvLangs.map((code, i) => (
+				<li>
+					<a
+						class:list={['btn', i === 0 ? 'btn--solid' : 'btn--outline']}
+						href={cv[code]}
+						download
+						hreflang={code}
+					>
+						<span class="glyph" aria-hidden="true">
+							{'↓ '}
+						</span>
+						{cv[code].split('/').pop()}
+						<span class="visually-hidden"> ({languages[code]})</span>
+					</a>
+				</li>
+			))}
+		</ul>
+		<p class="term__exit" aria-hidden="true">
+			[process exited with code 0]
+		</p>
+	</div>
+</Section>
+
+<style>
+	:global(.contact) {
+		padding-bottom: var(--space-section);
+	}
+
+	.term {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-4);
+		max-width: 47.5rem;
+		padding: clamp(var(--space-4), 3vw, 1.75rem);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-md);
+		background: var(--color-bg-sunken);
+	}
+
+	.term__status {
+		font-size: var(--text-sm);
+		color: var(--color-muted);
+	}
+
+	.term__ok {
+		color: var(--color-accent);
+	}
+
+	.term__links {
+		display: grid;
+		gap: var(--space-1);
+	}
+
+	.term__row {
+		display: grid;
+		grid-template-columns: 6.5rem 1fr;
+		align-items: center;
+		min-height: var(--target-min);
+	}
+
+	.term__row dt {
+		color: var(--color-muted);
+	}
+
+	.term__row a {
+		color: var(--color-accent);
+		overflow-wrap: anywhere;
+	}
+
+	.term__row a:hover {
+		color: var(--color-accent-hover);
+	}
+
+	.term__cv {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+		margin-top: var(--space-2);
+	}
+
+	.term__exit {
+		margin-top: var(--space-2);
+		font-size: var(--text-sm);
+		color: var(--color-muted);
+	}
+</style>

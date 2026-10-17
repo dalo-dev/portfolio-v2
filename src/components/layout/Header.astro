@@ -1,0 +1,106 @@
+---
+import Logo from '../Logo.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { sections } from '../../data/site';
+import type { Lang } from '../../i18n/ui';
+import { localizePath, useTranslations } from '../../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const home = localizePath(lang);
+---
+
+<header class="header">
+	<div class="header__inner container">
+		<a href={home} class="brand">
+			<Logo class="brand__mark" />
+			<span>
+				dalo<span class="brand__tld">.dev</span>
+			</span>
+		</a>
+		<nav class="header__nav" aria-label={t('nav.label')}>
+			<ul class="nav">
+				{sections.map((id) => (
+					<li>
+						<a href={`${home}#${id}`}>
+							<span aria-hidden="true">./</span>
+							{t(`nav.${id}`)}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+		<LanguageSwitcher lang={lang} />
+	</div>
+</header>
+
+<style>
+	.header {
+		background: var(--color-bg-sunken);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.header__inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0 var(--space-8);
+		padding-block: var(--space-1);
+	}
+
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.625rem;
+		min-height: var(--target-min);
+		color: var(--color-heading);
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.brand :global(.brand__mark) {
+		width: 1.5rem;
+		height: 1.5rem;
+		color: var(--color-accent);
+	}
+
+	.brand__tld {
+		color: var(--color-muted);
+	}
+
+	.nav {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 var(--space-5);
+		font-size: var(--text-sm);
+	}
+
+	.nav a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.25rem;
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	.nav a:hover {
+		color: var(--color-heading);
+		text-decoration: underline;
+	}
+
+	/* On narrow screens the nav drops to its own row under brand + language. */
+	@media (max-width: 47.99rem) {
+		.header__nav {
+			order: 3;
+			flex-basis: 100%;
+			padding-bottom: var(--space-2);
+		}
+	}
+</style>

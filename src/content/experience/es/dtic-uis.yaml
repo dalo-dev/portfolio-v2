@@ -1,0 +1,9 @@
+company: DTIC UIS
+role: Ingeniero Frontend
+start: 2022-03
+end: null
+highlights:
+  - Construí el frontend del proceso de admisiones que atiende a más de 20.000 estudiantes por semestre.
+  - Diseñé componentes reutilizables con Angular Material en múltiples módulos institucionales.
+  - Implementé pruebas unitarias con Karma y Jasmine en un equipo Scrum.
+stack: [Angular, TypeScript, Angular Material, SASS, REST APIs, RxJS, Karma, Jasmine]

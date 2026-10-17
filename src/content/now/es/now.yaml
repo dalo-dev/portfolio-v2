@@ -6,7 +6,7 @@ items:
   - label: estudiando
     text: Explorando distintas ramas de las ciencias de la computación de camino a una maestría.
   - label: homelab
-    text: Aprendiendo self-hosting y administración de servidores con el ThinkPad de mi clóset.
+    text: Aprendiendo self-hosting y administración de servidores en mi homelab, un ThinkPad T480.
   - label: estado
     text: Abierto a roles frontend remotos (zonas horarias de EE. UU., LATAM y Europa).
     highlight: true

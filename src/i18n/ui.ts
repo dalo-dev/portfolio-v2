@@ -28,7 +28,7 @@ const en = {
 
 	'hero.role': 'Frontend Developer & Systems Engineer',
 	'hero.tagline':
-		'I build fast, accessible interfaces and like knowing how things work — down to the server in my closet.',
+		'I build fast, accessible interfaces and like knowing how things work — from the browser down to the server.',
 	'hero.cta.contact': './get-in-touch',
 	'hero.cta.cv': './get-cv --lang=en',
 	'hero.logo.label': 'dalo.dev logo rendered in ASCII characters',
@@ -119,7 +119,7 @@ const es: Record<UIKey, string> = {
 
 	'hero.role': 'Desarrollador Frontend & Ingeniero de Sistemas',
 	'hero.tagline':
-		'Construyo interfaces rápidas y accesibles, y me gusta entender cómo funcionan las cosas — hasta el servidor en mi clóset.',
+		'Construyo interfaces rápidas y accesibles, y me gusta entender cómo funcionan las cosas — desde el navegador hasta el servidor.',
 	'hero.cta.contact': './contactame',
 	'hero.cta.cv': './get-cv --lang=es',
 	'hero.logo.label': 'Logo de dalo.dev dibujado con caracteres ASCII',

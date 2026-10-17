@@ -6,7 +6,7 @@ items:
   - label: studying
     text: Exploring different branches of computer science on the way to a master's degree.
   - label: homelab
-    text: Learning self-hosting and server administration on the ThinkPad in my closet.
+    text: Learning self-hosting and server administration on my ThinkPad T480 homelab.
   - label: status
     text: Open to remote frontend roles (US / LATAM / EU time zones).
     highlight: true

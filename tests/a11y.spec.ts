@@ -9,8 +9,6 @@ const routes = [
 	'/es/',
 	'/projects/birthdays-hub/',
 	'/es/projects/birthdays-hub/',
-	'/projects/portfolio-v1/',
-	'/es/projects/portfolio-v1/',
 	'/404',
 ];
 

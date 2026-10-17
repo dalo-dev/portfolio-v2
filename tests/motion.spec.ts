@@ -60,8 +60,11 @@ test('pause toggle turns motion off and persists across navigation', async ({ pa
 	await expect(page.locator('html')).toHaveClass(/motion-off/);
 	await expect.poll(() => page.evaluate(opacity('#contact h2'))).toBe('1');
 
-	await page.getByRole('link', { name: 'Birthdays Hub', exact: true }).click();
-	await expect(page).toHaveURL(/birthdays-hub/);
+	await page
+		.getByRole('navigation', { name: 'Language' })
+		.getByRole('link', { name: 'Español' })
+		.click();
+	await expect(page).toHaveURL(/\/es\/$/);
 	await expect(page.locator('html')).toHaveClass(/motion-off/);
 	await expect(page.locator('[data-motion-toggle]')).toHaveAttribute('aria-pressed', 'true');
 });

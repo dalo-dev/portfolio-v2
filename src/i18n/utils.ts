@@ -16,7 +16,7 @@ export function useTranslations(lang: Lang) {
 	};
 }
 
-/** Localized URL for a path such as `projects/birthdays-hub`. */
+/** Localized URL for a path such as `''` (home) or `some/page`. */
 export function localizePath(lang: Lang, path = ''): string {
 	return getRelativeLocaleUrl(lang, path);
 }

@@ -220,7 +220,7 @@ html.motion-off::view-transition-new(*) {
 	}
 }
 
-html.motion-on :is(.card__title a, .brand, .nav a, .btn):hover {
+html.motion-on :is(.card__links a, .brand, .nav a, .btn):hover {
 	animation: glitch 280ms steps(1) 1;
 }
 

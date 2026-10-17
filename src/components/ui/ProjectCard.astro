@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import TagList from './TagList.astro';
 import { profile } from '../../data/site';
 import type { Lang } from '../../i18n/ui';
-import { localizePath, useTranslations } from '../../i18n/utils';
+import { useTranslations } from '../../i18n/utils';
 import { slugOf } from '../../lib/content';
 
 interface Props {
@@ -14,7 +14,6 @@ interface Props {
 const { project, lang } = Astro.props;
 const t = useTranslations(lang);
 const slug = slugOf(project);
-const href = localizePath(lang, `projects/${slug}`);
 const { title, summary, stack, repo, live } = project.data;
 const liveHost = live ? new URL(live).hostname.replace(/^www\./, '') : undefined;
 ---
@@ -27,21 +26,10 @@ const liveHost = live ? new URL(live).hostname.replace(/^www\./, '') : undefined
 		</span>
 	</p>
 	<div class="card__body">
-		<h3 class="card__title" transition:name={`project-title-${slug}`}>
-			<a href={href}>{title}</a>
-		</h3>
+		<h3 class="card__title">{title}</h3>
 		<p class="card__summary">{summary}</p>
 		<TagList items={stack} label={t('projects.stack')} />
 		<ul class="card__links">
-			<li>
-				<a href={href}>
-					<span class="glyph" aria-hidden="true">
-						{'→ '}
-					</span>
-					{t('projects.details')}
-					<span class="visually-hidden">: {title}</span>
-				</a>
-			</li>
 			{repo && (
 				<li>
 					<a href={repo} rel="noopener">
@@ -113,15 +101,6 @@ const liveHost = live ? new URL(live).hostname.replace(/^www\./, '') : undefined
 
 	.card__title {
 		font-size: var(--text-lg);
-	}
-
-	.card__title a {
-		color: var(--color-heading);
-		text-decoration: none;
-	}
-
-	.card__title a:hover {
-		text-decoration: underline;
 	}
 
 	.card__summary {

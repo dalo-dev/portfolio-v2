@@ -19,20 +19,22 @@ test('Spanish home is localized', async ({ page }) => {
 });
 
 test('language switcher keeps the current page', async ({ page }) => {
-	await page.goto('/projects/birthdays-hub/');
+	await page.goto('/');
 	await page
 		.getByRole('navigation', { name: 'Language' })
 		.getByRole('link', { name: 'Español' })
 		.click();
-	await expect(page).toHaveURL(/\/es\/projects\/birthdays-hub\/$/);
+	await expect(page).toHaveURL(/\/es\/$/);
 	await expect(page.locator('html')).toHaveAttribute('lang', 'es');
 });
 
-test('project cards link to their detail page', async ({ page }) => {
+test('project cards link out to the project', async ({ page }) => {
 	await page.goto('/');
-	await page.getByRole('link', { name: 'Birthdays Hub', exact: true }).click();
-	await expect(page).toHaveURL(/\/projects\/birthdays-hub\/$/);
-	await expect(page.getByRole('heading', { level: 1 })).toHaveText('Birthdays Hub');
+	const card = page.locator('#projects article', { hasText: 'Birthdays Hub' });
+	await expect(card.getByRole('link', { name: /birthdayshub\.com/ })).toHaveAttribute(
+		'href',
+		'https://birthdayshub.com/',
+	);
 });
 
 test('CV downloads exist in both languages', async ({ request }) => {

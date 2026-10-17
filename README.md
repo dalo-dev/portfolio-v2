@@ -20,14 +20,14 @@ All content lives in `src/content/` and is validated by the schemas in `src/cont
 Localized entries exist once per language with the **same file name**; the build fails if a
 translation is missing.
 
-| What       | Where                                                          |
-| :--------- | :------------------------------------------------------------- |
-| Experience | `src/content/experience/{en,es}/<slug>.yaml`                   |
-| Education  | `src/content/education/{en,es}/<slug>.yaml`                    |
-| Projects   | `src/content/projects/{en,es}/<slug>.md` → `/projects/<slug>/` |
-| Skills     | `src/content/skills.yaml` (labels in `src/i18n/ui.ts`)         |
-| UI strings | `src/i18n/ui.ts`                                               |
-| Links / CV | `src/data/site.ts`, PDFs in `public/cv/`                       |
+| What       | Where                                                        |
+| :--------- | :----------------------------------------------------------- |
+| Experience | `src/content/experience/{en,es}/<slug>.yaml`                 |
+| Education  | `src/content/education/{en,es}/<slug>.yaml`                  |
+| Projects   | `src/content/projects/{en,es}/<slug>.md` (front matter only) |
+| Skills     | `src/content/skills.yaml` (labels in `src/i18n/ui.ts`)       |
+| UI strings | `src/i18n/ui.ts`                                             |
+| Links / CV | `src/data/site.ts`, PDFs in `public/cv/`                     |
 
 Dates use `YYYY-MM`; `end: null` marks a current role. Markdown below a project's front matter
 is shown as a write-up on its detail page.

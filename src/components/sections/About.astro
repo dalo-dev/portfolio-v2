@@ -1,5 +1,8 @@
 ---
+import { Picture } from 'astro:assets';
 import Section from '../Section.astro';
+import TerminalWindow from '../terminal/TerminalWindow.astro';
+import profilePhoto from '../../assets/images/profile.jpg';
 import type { Lang } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
@@ -13,16 +16,56 @@ const t = useTranslations(lang);
 
 <Section id="about" title={t('about.title')} command="cat about.md">
 	<div class="about">
-		<p>{t('about.p1')}</p>
-		<p>{t('about.p2')}</p>
+		<TerminalWindow title="imgcat ~/me.jpg" class="about__photo">
+			<Picture
+				src={profilePhoto}
+				alt={t('about.photo.alt')}
+				widths={[280, 560]}
+				sizes="17.5rem"
+				formats={['avif', 'webp']}
+				class="about__img"
+			/>
+		</TerminalWindow>
+		<div class="about__text">
+			<p>{t('about.p1')}</p>
+			<p>{t('about.p2')}</p>
+		</div>
 	</div>
 </Section>
 
 <style>
+	/* Photo first on narrow screens; to the right of the text once both fit side by side. */
 	.about {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		gap: var(--space-8) var(--space-12);
+	}
+
+	.about__text {
+		flex: 999 1 26rem;
+		min-width: 0;
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-4);
 		max-width: var(--prose-max);
+	}
+
+	.about :global(.about__photo) {
+		flex: 0 0 auto;
+		width: min(100%, 17.5rem);
+	}
+
+	.about :global(.about__img) {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 1;
+		object-fit: cover;
+	}
+
+	@media (min-width: 52rem) {
+		.about :global(.about__photo) {
+			order: 2;
+		}
 	}
 </style>

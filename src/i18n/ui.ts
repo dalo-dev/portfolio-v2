@@ -42,6 +42,7 @@ const en = {
 		"I'm Daniel Alejandro León Ortiz, a Systems Engineer focused on building scalable web applications that balance architectural integrity with high-performance user experiences. I approach frontend development with a rigorous engineering mindset, prioritizing maintainable code, comprehensive testing, and sustainable component structures.",
 	'about.p2':
 		'I specialize in translating complex business requirements into intuitive digital solutions while maintaining a quality-first approach throughout the software development lifecycle. I thrive in agile environments where technical excellence and system reliability are the core priorities.',
+	'about.photo.alt': 'Portrait of Daniel León',
 	'experience.title': 'Experience',
 	'experience.present': 'present',
 	'experience.stack': 'Tech stack',
@@ -115,6 +116,7 @@ const es: Record<UIKey, string> = {
 		'Soy Daniel Alejandro León Ortiz, Ingeniero de Sistemas enfocado en construir aplicaciones web escalables que equilibran la integridad arquitectónica con experiencias de usuario de alto rendimiento. Abordo el desarrollo frontend con una mentalidad de ingeniería rigurosa, priorizando código mantenible, pruebas exhaustivas y estructuras de componentes sostenibles.',
 	'about.p2':
 		'Me especializo en traducir requisitos de negocio complejos en soluciones digitales intuitivas, manteniendo un enfoque de calidad ante todo a lo largo del ciclo de vida del desarrollo de software. Prospero en entornos ágiles donde la excelencia técnica y la confiabilidad del sistema son las prioridades fundamentales.',
+	'about.photo.alt': 'Retrato de Daniel León',
 	'experience.title': 'Experiencia',
 	'experience.present': 'presente',
 	'experience.stack': 'Tecnologías',

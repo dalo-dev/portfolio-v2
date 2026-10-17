@@ -27,7 +27,8 @@ const en = {
 	'lang.switch': 'Leer en español',
 
 	'hero.role': 'Frontend Developer & Systems Engineer',
-	'hero.tagline': 'Building modern, performant web experiences with clean code and great design.',
+	'hero.tagline':
+		'I build fast, accessible interfaces and like knowing how things work — down to the server in my closet.',
 	'hero.cta.contact': './get-in-touch',
 	'hero.cta.cv': './get-cv --lang=en',
 	'hero.logo.label': 'dalo.dev logo rendered in ASCII characters',
@@ -44,9 +45,11 @@ const en = {
 
 	'about.title': 'About',
 	'about.p1':
-		"I'm Daniel Alejandro León Ortiz, a Systems Engineer focused on building scalable web applications that balance architectural integrity with high-performance user experiences. I approach frontend development with a rigorous engineering mindset, prioritizing maintainable code, comprehensive testing, and sustainable component structures.",
+		"I'm Daniel Alejandro León Ortiz, a Systems Engineer (Cum Laude, Universidad Industrial de Santander) who builds web interfaces with React, Angular and TypeScript. At DTIC UIS I build and maintain the university's admissions frontend, used by 20,000+ applicants every semester, along with reusable Angular Material components shared across institutional modules.",
 	'about.p2':
-		'I specialize in translating complex business requirements into intuitive digital solutions while maintaining a quality-first approach throughout the software development lifecycle. I thrive in agile environments where technical excellence and system reliability are the core priorities.',
+		'I care about the details people feel but rarely notice: accessibility, performance, and interfaces that behave predictably. I write tests, keep components small and reusable, and use AI tools to move faster — while making sure I understand every line I ship.',
+	'about.p3':
+		'Outside of work, Linux is my daily driver and I tinker with a small homelab — it keeps me curious about what happens below the browser.',
 	'about.photo.alt': 'Portrait of Daniel León',
 	'about.languages': 'Languages',
 	'lang.spanish': 'Spanish',
@@ -116,7 +119,7 @@ const es: Record<UIKey, string> = {
 
 	'hero.role': 'Desarrollador Frontend & Ingeniero de Sistemas',
 	'hero.tagline':
-		'Construyendo experiencias web modernas y eficientes con código limpio y buen diseño.',
+		'Construyo interfaces rápidas y accesibles, y me gusta entender cómo funcionan las cosas — hasta el servidor en mi clóset.',
 	'hero.cta.contact': './contactame',
 	'hero.cta.cv': './get-cv --lang=es',
 	'hero.logo.label': 'Logo de dalo.dev dibujado con caracteres ASCII',
@@ -133,9 +136,11 @@ const es: Record<UIKey, string> = {
 
 	'about.title': 'Sobre mí',
 	'about.p1':
-		'Soy Daniel Alejandro León Ortiz, Ingeniero de Sistemas enfocado en construir aplicaciones web escalables que equilibran la integridad arquitectónica con experiencias de usuario de alto rendimiento. Abordo el desarrollo frontend con una mentalidad de ingeniería rigurosa, priorizando código mantenible, pruebas exhaustivas y estructuras de componentes sostenibles.',
+		'Soy Daniel Alejandro León Ortiz, Ingeniero de Sistemas (Cum Laude, Universidad Industrial de Santander) y construyo interfaces web con React, Angular y TypeScript. En la DTIC UIS desarrollo y mantengo el frontend de admisiones de la universidad, que usan más de 20.000 aspirantes cada semestre, junto con componentes reutilizables de Angular Material compartidos entre módulos institucionales.',
 	'about.p2':
-		'Me especializo en traducir requisitos de negocio complejos en soluciones digitales intuitivas, manteniendo un enfoque de calidad ante todo a lo largo del ciclo de vida del desarrollo de software. Prospero en entornos ágiles donde la excelencia técnica y la confiabilidad del sistema son las prioridades fundamentales.',
+		'Me importan los detalles que las personas sienten aunque rara vez notan: accesibilidad, rendimiento e interfaces que se comportan de forma predecible. Escribo pruebas, mantengo los componentes pequeños y reutilizables, y uso herramientas de IA para avanzar más rápido, asegurándome de entender cada línea que entrego.',
+	'about.p3':
+		'Fuera del trabajo, Linux es mi sistema de uso diario y experimento con un pequeño homelab: me mantiene curioso por lo que pasa debajo del navegador.',
 	'about.photo.alt': 'Retrato de Daniel León',
 	'about.languages': 'Idiomas',
 	'lang.spanish': 'Español',

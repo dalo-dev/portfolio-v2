@@ -3,6 +3,7 @@ import AsciiLogo from '../terminal/AsciiLogo.astro';
 import Cursor from '../terminal/Cursor.astro';
 import Prompt from '../terminal/Prompt.astro';
 import TerminalWindow from '../terminal/TerminalWindow.astro';
+import SocialLinks from '../ui/SocialLinks.astro';
 import { cv, profile } from '../../data/site';
 import type { Lang } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
@@ -37,6 +38,7 @@ const t = useTranslations(lang);
 				{t('hero.cta.cv')}
 			</a>
 		</div>
+		<SocialLinks lang={lang} />
 	</div>
 	<TerminalWindow title="cat logo.txt" class="hero__window">
 		<div class="hero__art">

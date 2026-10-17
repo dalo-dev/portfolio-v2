@@ -36,8 +36,10 @@ const art = asciiLogo;
 		margin-inline: auto;
 	}
 
-	/* Hidden until the decode starts; reveals itself anyway if the script never runs. */
-	:global(html.motion-on) .ascii-logo[data-ascii-animate]:not(.is-ready) {
+	/* Hidden until the decode starts (reveals itself anyway if the script never runs). Not while
+	   booting: under the boot overlay it stays painted, so it doesn't hold back LCP. The decode
+	   starts in the same task that ends the boot, so the final art never flashes. */
+	:global(html.motion-on:not(.booting)) .ascii-logo[data-ascii-animate]:not(.is-ready) {
 		visibility: hidden;
 		animation: ascii-fallback 0s 1.5s forwards;
 	}

@@ -1,5 +1,6 @@
 ---
 import MotionToggle from '../motion/MotionToggle.astro';
+import SocialLinks from '../ui/SocialLinks.astro';
 import { profile } from '../../data/site';
 import type { Lang } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
@@ -14,6 +15,16 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
+	<div class="footer__links container">
+		<SocialLinks lang={lang} />
+		<a class="footer__top" href="#main">
+			<span class="glyph" aria-hidden="true">
+				{'↑ '}
+			</span>
+			{t('footer.top')}
+			<span class="visually-hidden"> ({t('footer.top.label')})</span>
+		</a>
+	</div>
 	<div class="footer__inner container">
 		<p class="statusline" aria-hidden="true">
 			<span class="statusline__mode">{t('footer.mode')}</span>
@@ -43,6 +54,29 @@ const year = new Date().getFullYear();
 		justify-content: space-between;
 		gap: var(--space-2) var(--space-6);
 		padding-block: var(--space-3);
+	}
+
+	.footer__links {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0 var(--space-6);
+		padding-block: var(--space-2);
+		border-bottom: 1px dashed var(--color-border);
+	}
+
+	.footer__top {
+		display: inline-flex;
+		align-items: center;
+		min-height: var(--target-min);
+		color: var(--color-muted);
+		text-decoration: none;
+	}
+
+	.footer__top:hover {
+		color: var(--color-heading);
+		text-decoration: underline;
 	}
 
 	.footer__end {

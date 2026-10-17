@@ -70,7 +70,7 @@ const log = [
 		gap: var(--space-12) 6rem;
 		padding: var(--gutter);
 		background: var(--color-bg-sunken);
-		animation: boot-out 400ms steps(10, end) 2.4s forwards;
+		animation: boot-out 400ms steps(10, end) 1.6s forwards;
 	}
 
 	:global(html.boot-skip) .boot {
@@ -86,7 +86,7 @@ const log = [
 	.boot__line {
 		opacity: 0;
 		animation: boot-line 50ms steps(1, jump-start) forwards;
-		animation-delay: calc(var(--i) * 140ms);
+		animation-delay: calc(var(--i) * 90ms);
 	}
 
 	.boot__ok {
@@ -118,7 +118,7 @@ const log = [
 
 	.boot__art {
 		clip-path: inset(0 0 100% 0);
-		animation: boot-print 900ms steps(19, end) 300ms forwards;
+		animation: boot-print 600ms steps(19, end) 200ms forwards;
 	}
 
 	.boot__skip {

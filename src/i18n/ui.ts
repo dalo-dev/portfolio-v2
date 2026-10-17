@@ -85,6 +85,9 @@ const en = {
 
 	'footer.rights': 'All rights reserved.',
 	'footer.mode': 'NORMAL',
+	'footer.top': 'cd /top',
+	'footer.top.label': 'back to top',
+	'social.email': 'Email',
 
 	'motion.pause': 'pause animations',
 	'boot.skip': 'Skip intro',
@@ -177,6 +180,9 @@ const es: Record<UIKey, string> = {
 
 	'footer.rights': 'Todos los derechos reservados.',
 	'footer.mode': 'NORMAL',
+	'footer.top': 'cd /top',
+	'footer.top.label': 'volver arriba',
+	'social.email': 'Correo',
 
 	'motion.pause': 'pausar animaciones',
 	'boot.skip': 'Saltar intro',

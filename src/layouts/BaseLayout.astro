@@ -1,8 +1,10 @@
 ---
 import { Font } from 'astro:assets';
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
+import MotionHead from '../components/motion/MotionHead.astro';
 import { profile } from '../data/site';
 import { defaultLang, languages, type Lang } from '../i18n/ui';
 import { localizePath, stripLangPrefix, useTranslations } from '../i18n/utils';
@@ -29,10 +31,34 @@ const alternates = (Object.keys(languages) as Lang[]).map((code) => ({
 }));
 const ogImage = new URL('/images/og-image.png', Astro.site);
 const ogLocale = { en: 'en_US', es: 'es_CO' } satisfies Record<Lang, string>;
+
+// Terminal "clear": the old page blinks out, the new one prints top-to-bottom.
+const terminalClear = {
+	forwards: {
+		old: { name: 'term-out', duration: '120ms', easing: 'linear', fillMode: 'both' },
+		new: {
+			name: 'term-in',
+			duration: '360ms',
+			easing: 'steps(12, end)',
+			fillMode: 'both',
+			delay: '80ms',
+		},
+	},
+	backwards: {
+		old: { name: 'term-out', duration: '120ms', easing: 'linear', fillMode: 'both' },
+		new: {
+			name: 'term-in',
+			duration: '360ms',
+			easing: 'steps(12, end)',
+			fillMode: 'both',
+			delay: '80ms',
+		},
+	},
+};
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} transition:animate="none">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -77,16 +103,21 @@ const ogLocale = { en: 'en_US', es: 'es_CO' } satisfies Record<Lang, string>;
 		<meta name="twitter:card" content="summary_large_image" />
 
 		<Font cssVariable="--font-mono" preload />
+		<MotionHead />
+		<ClientRouter />
 	</head>
 	<body>
 		<a class="skip-link" href="#main">
 			{t('skip.link')}
 		</a>
 		<Header lang={lang} />
-		<main id="main" tabindex="-1">
+		<main id="main" tabindex="-1" transition:animate={terminalClear}>
 			<slot />
 		</main>
 		<Footer lang={lang} />
+		<script>
+			import '../scripts/anim/index';
+		</script>
 	</body>
 </html>
 

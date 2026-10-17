@@ -30,7 +30,9 @@ const back = `${localizePath(lang)}#projects`;
 			<span class="visually-hidden">— {t('projects.title')}</span>
 		</a>
 		<Prompt command={`cat ~/projects/${slug}/README.md`} />
-		<h1 class="project__title">{title}</h1>
+		<h1 class="project__title" transition:name={`project-title-${slug}`}>
+			{title}
+		</h1>
 		<p class="project__summary">{summary}</p>
 		<TagList items={stack} label={t('projects.stack')} />
 		{(repo || live) && (

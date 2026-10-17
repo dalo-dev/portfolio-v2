@@ -18,7 +18,7 @@ const fileCount = groups.reduce((sum, group) => sum + group.data.items.length, 0
 <Section id="skills" title={t('skills.title')} command="tree ~/skills">
 	<div class="skills">
 		{groups.map(({ data }) => (
-			<div>
+			<div data-reveal-item>
 				<h3 class="skills__group">{t(`skills.${data.id}`)}/</h3>
 				<TreeList items={data.items} />
 			</div>

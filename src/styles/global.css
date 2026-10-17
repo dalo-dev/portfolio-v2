@@ -167,3 +167,63 @@ button {
 		flex: 1 1 100%;
 	}
 }
+
+/* ── Motion ─────────────────────────────────────────────────────────────
+ * `html.motion-on` / `html.motion-off` are set before first paint by MotionHead.astro
+ * (OS reduced-motion setting + the footer pause toggle).
+ */
+
+/* Page transitions (see BaseLayout's terminalClear) */
+@keyframes term-out {
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes term-in {
+	from {
+		clip-path: inset(0 0 100% 0);
+	}
+
+	to {
+		clip-path: inset(0);
+	}
+}
+
+html.motion-off::view-transition-group(*),
+html.motion-off::view-transition-old(*),
+html.motion-off::view-transition-new(*) {
+	animation: none !important;
+}
+
+/* Glitch on hover: a quick RGB-split in the palette's accent/muted tones */
+@keyframes glitch {
+	0%,
+	100% {
+		text-shadow: none;
+	}
+
+	25% {
+		text-shadow:
+			2px 0 var(--color-accent),
+			-2px 0 var(--color-faint);
+	}
+
+	50% {
+		text-shadow:
+			-2px 0 var(--color-accent),
+			2px 0 var(--color-faint);
+	}
+
+	75% {
+		text-shadow: 1px 0 var(--color-accent);
+	}
+}
+
+html.motion-on :is(.card__title a, .brand, .nav a, .btn):hover {
+	animation: glitch 280ms steps(1) 1;
+}
+
+html.motion-off .cursor {
+	animation: none;
+}

@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+test.use({ reducedMotion: 'reduce' });
+
 test('home renders every section in English', async ({ page }) => {
 	await page.goto('/');
 	await expect(page).toHaveTitle(/Daniel León/);

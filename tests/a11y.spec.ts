@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+// Static end state: no boot overlay or pending reveals while axe inspects the page.
+test.use({ reducedMotion: 'reduce' });
+
 const routes = [
 	'/',
 	'/es/',

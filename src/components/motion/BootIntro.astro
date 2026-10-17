@@ -1,0 +1,169 @@
+---
+/**
+ * First-visit boot overlay. Timing is pure CSS so it can never get stuck; the head script
+ * (MotionHead) only toggles `html.booting` and handles skip/cleanup.
+ */
+import AsciiLogo from '../terminal/AsciiLogo.astro';
+import { profile } from '../../data/site';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const log = [
+	'Started static runtime.',
+	`Mounted /home/${profile.handle}/projects.`,
+	'Loaded locales: en, es.',
+	'Reached target experience.log.',
+	'All systems nominal.',
+];
+---
+
+<div class="boot" aria-hidden="true">
+	<div class="boot__text">
+		<p class="boot__line" style="--i: 0">
+			dalo.dev v2.0.0 (tty1)
+		</p>
+		{log.map((line, i) => (
+			<p class="boot__line" style={`--i: ${i + 1}`}>
+				<span class="boot__ok">[ OK ]</span> {line}
+			</p>
+		))}
+		<!-- prettier-ignore -->
+		<p class="boot__line boot__prompt" style={`--i: ${log.length + 2}`}><span class="boot__ok">{`${profile.handle}@${profile.host}`}</span>{':~$ '}<span class="boot__cmd">whoami</span></p>
+		<p class="boot__line boot__name" style={`--i: ${log.length + 3}`}>
+			{profile.name}
+		</p>
+		<p class="boot__line boot__role" style={`--i: ${log.length + 4}`}>
+			{t('hero.role')}
+		</p>
+	</div>
+	<div class="boot__art">
+		<AsciiLogo />
+	</div>
+	<div class="boot__skip">
+		<span>{t('boot.hint')}</span>
+		<button type="button" tabindex="-1">
+			{t('boot.skip')} →
+		</button>
+	</div>
+</div>
+
+<style>
+	.boot {
+		display: none;
+	}
+
+	:global(html.booting) .boot {
+		position: fixed;
+		inset: 0;
+		z-index: 1000;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+		gap: var(--space-12) 6rem;
+		padding: var(--gutter);
+		background: var(--color-bg-sunken);
+		animation: boot-out 450ms ease 2.4s forwards;
+	}
+
+	:global(html.boot-skip) .boot {
+		animation: boot-out 150ms ease forwards;
+	}
+
+	.boot__text {
+		display: flex;
+		flex-direction: column;
+		min-width: min(100%, 26rem);
+	}
+
+	.boot__line {
+		opacity: 0;
+		animation: boot-line 50ms steps(1, jump-start) forwards;
+		animation-delay: calc(var(--i) * 140ms);
+	}
+
+	.boot__ok {
+		color: var(--color-accent);
+	}
+
+	.boot__prompt {
+		margin-top: var(--space-6);
+		color: var(--color-muted);
+	}
+
+	.boot__cmd {
+		color: var(--color-heading);
+	}
+
+	.boot__name {
+		margin-top: var(--space-3);
+		font-size: var(--text-hero);
+		font-weight: 700;
+		line-height: var(--leading-tight);
+		letter-spacing: -0.02em;
+		color: var(--color-heading);
+	}
+
+	.boot__role {
+		margin-top: var(--space-2);
+		color: var(--color-accent);
+	}
+
+	.boot__art {
+		clip-path: inset(0 0 100% 0);
+		animation: boot-print 900ms steps(19, end) 300ms forwards;
+	}
+
+	.boot__skip {
+		position: absolute;
+		right: var(--gutter);
+		bottom: var(--gutter);
+		display: flex;
+		align-items: center;
+		gap: var(--space-4);
+		font-size: var(--text-sm);
+		color: var(--color-muted);
+	}
+
+	.boot__skip button {
+		min-height: var(--target-min);
+		padding-inline: var(--space-4);
+		border: 1px solid var(--color-border-strong);
+		border-radius: var(--radius);
+		background: var(--color-surface);
+		color: var(--color-heading);
+		cursor: pointer;
+	}
+
+	@keyframes boot-line {
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes boot-print {
+		to {
+			clip-path: inset(0);
+		}
+	}
+
+	@keyframes boot-out {
+		to {
+			opacity: 0;
+			visibility: hidden;
+		}
+	}
+
+	@media (max-width: 40rem) {
+		.boot__art {
+			display: none;
+		}
+	}
+</style>

@@ -1,10 +1,16 @@
 ---
 interface Props {
-	label: string;
+	/** Accessible name; omit when the art is decorative. */
+	label?: string;
+	/** Decode-in + ambient glitch (see src/scripts/anim/ascii.ts). */
+	animate?: boolean;
 	class?: string;
 }
 
-const { label, class: className } = Astro.props;
+const { label, animate = false, class: className } = Astro.props;
+const a11y: Record<string, string> = label
+	? { role: 'img', 'aria-label': label }
+	: { 'aria-hidden': 'true' };
 
 // Generated from the logo mark (40 cols, ramp " .:-=+*#%@"). Keep the trailing-space-free lines.
 const art = String.raw`.----------------- --------------:
@@ -30,9 +36,8 @@ const art = String.raw`.----------------- --------------:
 
 <pre
 	class:list={['ascii-logo', className]}
-	role="img"
-	aria-label={label}
-	data-ascii-logo
+	data-ascii-animate={animate ? '' : undefined}
+	{...a11y}
 >{art}</pre>
 
 <style>
@@ -45,5 +50,21 @@ const art = String.raw`.----------------- --------------:
 		white-space: pre;
 		width: max-content;
 		margin-inline: auto;
+	}
+
+	/* Hidden until the decode starts; reveals itself anyway if the script never runs. */
+	:global(html.motion-on) .ascii-logo[data-ascii-animate]:not(.is-ready) {
+		visibility: hidden;
+		animation: ascii-fallback 0s 4s forwards;
+	}
+
+	:global(html.motion-on) .ascii-logo {
+		--glow: 0 0 10px rgb(111 179 184 / 0.35);
+	}
+
+	@keyframes ascii-fallback {
+		to {
+			visibility: visible;
+		}
 	}
 </style>

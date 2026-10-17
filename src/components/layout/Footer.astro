@@ -1,4 +1,5 @@
 ---
+import MotionToggle from '../motion/MotionToggle.astro';
 import { profile } from '../../data/site';
 import type { Lang } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
@@ -20,7 +21,10 @@ const year = new Date().getFullYear();
 			<span>utf-8</span>
 			<span>{lang}</span>
 		</p>
-		<p class="footer__copy">{`© ${year} ${profile.fullName}. ${t('footer.rights')}`}</p>
+		<div class="footer__end">
+			<MotionToggle lang={lang} />
+			<p class="footer__copy">{`© ${year} ${profile.fullName}. ${t('footer.rights')}`}</p>
+		</div>
 	</div>
 </footer>
 
@@ -39,6 +43,13 @@ const year = new Date().getFullYear();
 		justify-content: space-between;
 		gap: var(--space-2) var(--space-6);
 		padding-block: var(--space-3);
+	}
+
+	.footer__end {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-2) var(--space-5);
 	}
 
 	.statusline {

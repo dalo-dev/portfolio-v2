@@ -8,7 +8,7 @@ interface Props {
 const { start, end, presentLabel } = Astro.props;
 ---
 
-<li class="item">
+<li class="item" data-reveal-item>
 	<p class="item__date">
 		<time datetime={start}>{start}</time>
 		<span aria-hidden="true"> → </span>

@@ -67,6 +67,10 @@ const en = {
 	'footer.rights': 'All rights reserved.',
 	'footer.mode': 'NORMAL',
 
+	'motion.pause': 'pause animations',
+	'boot.skip': 'Skip intro',
+	'boot.hint': 'press any key',
+
 	'notFound.title': 'Page not found',
 	'notFound.message': 'No such file or directory',
 	'notFound.hint': 'The page you are looking for does not exist or was moved.',
@@ -136,6 +140,10 @@ const es: Record<UIKey, string> = {
 
 	'footer.rights': 'Todos los derechos reservados.',
 	'footer.mode': 'NORMAL',
+
+	'motion.pause': 'pausar animaciones',
+	'boot.skip': 'Saltar intro',
+	'boot.hint': 'presiona cualquier tecla',
 
 	'notFound.title': 'Página no encontrada',
 	'notFound.message': 'No existe el archivo o directorio',

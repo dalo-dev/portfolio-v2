@@ -1,0 +1,54 @@
+---
+/**
+ * Runs before first paint: decides whether motion is on (OS setting + saved pause choice)
+ * and whether to play the boot intro. Inline on purpose so it never waits for the bundle.
+ */
+---
+
+<script is:inline>
+	(() => {
+		const root = document.documentElement;
+		const apply = () => {
+			let paused = false;
+			try {
+				paused = localStorage.getItem('motion') === 'off';
+			} catch {}
+			const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+			const on = !paused && !reduce;
+			root.classList.toggle('motion-on', on);
+			root.classList.toggle('motion-off', !on);
+			root.classList.toggle('motion-reduced', reduce);
+			return on;
+		};
+
+		const on = apply();
+
+		// Boot intro: first visit of the session, home page only, not when deep-linking.
+		let seen = true;
+		try {
+			seen = sessionStorage.getItem('booted') === '1';
+			sessionStorage.setItem('booted', '1');
+		} catch {}
+		if (on && !seen && /^\/(es\/)?$/.test(location.pathname) && !location.hash) {
+			root.classList.add('booting');
+			const skip = () => root.classList.add('boot-skip');
+			const done = (event) => {
+				if (event.animationName !== 'boot-out') return;
+				root.classList.remove('booting', 'boot-skip');
+				document.removeEventListener('keydown', skip);
+				document.removeEventListener('pointerdown', skip);
+				document.removeEventListener('animationend', done);
+				document.dispatchEvent(new Event('boot:done'));
+			};
+			document.addEventListener('keydown', skip);
+			document.addEventListener('pointerdown', skip);
+			document.addEventListener('animationend', done);
+		}
+
+		// The client router replaces <html> attributes on navigation; re-apply after each swap.
+		if (!window.__applyMotion) {
+			window.__applyMotion = apply;
+			document.addEventListener('astro:after-swap', apply);
+		}
+	})();
+</script>

@@ -12,7 +12,12 @@ const { id, title, command, class: className } = Astro.props;
 const headingId = `${id}-title`;
 ---
 
-<section id={id} aria-labelledby={headingId} class:list={['section container', className]}>
+<section
+	id={id}
+	aria-labelledby={headingId}
+	class:list={['section container', className]}
+	data-reveal
+>
 	<Prompt command={command} />
 	<h2 id={headingId} class="section__title">
 		<span aria-hidden="true" class="section__hash">

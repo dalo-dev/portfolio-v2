@@ -21,10 +21,13 @@ const liveHost = live ? new URL(live).hostname.replace(/^www\./, '') : undefined
 
 <article class="card">
 	<p class="card__bar" aria-hidden="true">
-		drwxr-xr-x {profile.handle} <span class="card__dir">{slug}/</span>
+		drwxr-xr-x {profile.handle}{' '}
+		<span class="card__dir" data-scramble>
+			{slug}/
+		</span>
 	</p>
 	<div class="card__body">
-		<h3 class="card__title">
+		<h3 class="card__title" transition:name={`project-title-${slug}`}>
 			<a href={href}>{title}</a>
 		</h3>
 		<p class="card__summary">{summary}</p>

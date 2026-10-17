@@ -17,7 +17,7 @@ const projects = await getProjects(lang);
 <Section id="projects" title={t('projects.title')} command="ls -la ~/projects">
 	<ul class="grid">
 		{projects.map((project) => (
-			<li>
+			<li data-reveal-item>
 				<ProjectCard project={project} lang={lang} />
 			</li>
 		))}

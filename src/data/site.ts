@@ -22,7 +22,7 @@ export const spokenLanguages = [
 		locale: 'en_US.UTF-8',
 		name: 'lang.english',
 		level: 'lang.professional',
-		certificate: { name: 'TOEFL iBT', score: '94/120' },
+		certificate: { name: 'TOEFL iBT', score: '94/120', year: 2022 },
 	},
 ] as const;
 

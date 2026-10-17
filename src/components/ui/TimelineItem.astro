@@ -1,16 +1,11 @@
 ---
-import type { ImageMetadata } from 'astro';
-import { Image } from 'astro:assets';
-
 interface Props {
 	start: string;
 	end: string | null;
 	presentLabel: string;
-	/** Decorative: the organization's name is always in the entry's text. */
-	logo?: ImageMetadata;
 }
 
-const { start, end, presentLabel, logo } = Astro.props;
+const { start, end, presentLabel } = Astro.props;
 ---
 
 <li class="item" data-reveal-item>
@@ -21,14 +16,7 @@ const { start, end, presentLabel, logo } = Astro.props;
 		{end ? <time datetime={end}>{end}</time> : <span class="item__present">{presentLabel}</span>}
 	</p>
 	<div class="item__body">
-		{logo && (
-			<span class="item__logo">
-				<Image src={logo} alt="" width={44} height={44} densities={[1, 2]} />
-			</span>
-		)}
-		<div class="item__content">
-			<slot />
-		</div>
+		<slot />
 	</div>
 </li>
 
@@ -54,41 +42,5 @@ const { start, end, presentLabel, logo } = Astro.props;
 	.item__body {
 		flex: 999 1 26rem;
 		min-width: 0;
-		display: flex;
-		align-items: flex-start;
-		gap: var(--space-4);
-	}
-
-	.item__content {
-		flex: 1;
-		min-width: 0;
-	}
-
-	/* Muted so different brand colors don't compete; full color on hover/focus. */
-	.item__logo {
-		flex: none;
-		width: 2.75rem;
-		height: 2.75rem;
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-md);
-		overflow: hidden;
-		background: var(--color-surface);
-	}
-
-	.item__logo :global(img) {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		filter: grayscale(1) contrast(1.1);
-		opacity: 0.8;
-		transition:
-			filter var(--duration) ease,
-			opacity var(--duration) ease;
-	}
-
-	.item:hover .item__logo :global(img),
-	.item:focus-within .item__logo :global(img) {
-		filter: none;
-		opacity: 1;
 	}
 </style>

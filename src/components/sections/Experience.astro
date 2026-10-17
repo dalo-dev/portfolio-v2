@@ -20,12 +20,7 @@ const jobs = await getExperience(lang);
 <Section id="experience" title={t('experience.title')} command="cat experience.log">
 	<Timeline>
 		{jobs.map(({ data }) => (
-			<TimelineItem
-				start={data.start}
-				end={data.end}
-				presentLabel={t('experience.present')}
-				logo={data.logo}
-			>
+			<TimelineItem start={data.start} end={data.end} presentLabel={t('experience.present')}>
 				<h3 class="job__title">
 					{data.role} <span class="job__at">@</span> {data.company}
 				</h3>

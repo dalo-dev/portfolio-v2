@@ -18,12 +18,7 @@ const studies = await getEducation(lang);
 <Section id="education" title={t('education.title')} command="cat education.md">
 	<Timeline>
 		{studies.map(({ data }) => (
-			<TimelineItem
-				start={data.start}
-				end={data.end}
-				presentLabel={t('experience.present')}
-				logo={data.logo}
-			>
+			<TimelineItem start={data.start} end={data.end} presentLabel={t('experience.present')}>
 				<h3 class="edu__degree">{data.degree}</h3>
 				<p class="edu__school">
 					{data.url ? (

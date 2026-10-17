@@ -1,0 +1,27 @@
+# Rendered as `neofetch` output. Keys stay in English like the real tool; `role` and service
+# descriptions are translated per language.
+machines:
+  - hostname: raider
+    command: neofetch
+    fields:
+      - { key: Host, value: MSI GE75 Raider }
+      - { key: Role, value: daily driver · work & experiments }
+      - { key: OS, value: CachyOS }
+      - { key: WM, value: Hyprland }
+      - { key: Shell, value: Noctalia }
+  - hostname: thinkpad
+    command: ssh thinkpad neofetch
+    fields:
+      - { key: Host, value: ThinkPad }
+      - { key: Role, value: homelab · self-hosting & tinkering }
+      - { key: OS, value: Ubuntu Server }
+    services:
+      - { name: immich, description: self-hosted photo & video backup (my own Google Photos) }
+      - { name: file-browser, description: web file manager to access and share files }
+      - { name: crafty, description: runs and manages Minecraft servers }
+rice:
+  text: Before moving to Noctalia, I built my own rice to learn how a Hyprland desktop fits together
+  name: crimson-mocha-dots
+  url: https://github.com/dalo-dev/crimson-mocha-dots
+  theme: Catppuccin Mocha Red
+ask: Ask me about Linux, ricing, self-hosting — or why I use Hyprland.

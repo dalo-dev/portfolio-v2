@@ -22,6 +22,7 @@ export const sections = [
 	'experience',
 	'projects',
 	'skills',
+	'lab',
 	'education',
 	'contact',
 ] as const;

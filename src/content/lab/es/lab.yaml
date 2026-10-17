@@ -1,0 +1,30 @@
+# Se muestra como la salida de `neofetch`. Las claves van en inglés como en la herramienta real;
+# `role` y las descripciones de servicios se traducen.
+machines:
+  - hostname: raider
+    command: neofetch
+    fields:
+      - { key: Host, value: MSI GE75 Raider }
+      - { key: Role, value: equipo principal · trabajo y experimentos }
+      - { key: OS, value: CachyOS }
+      - { key: WM, value: Hyprland }
+      - { key: Shell, value: Noctalia }
+  - hostname: thinkpad
+    command: ssh thinkpad neofetch
+    fields:
+      - { key: Host, value: ThinkPad }
+      - { key: Role, value: homelab · self-hosting y experimentos }
+      - { key: OS, value: Ubuntu Server }
+    services:
+      - { name: immich, description: respaldo propio de fotos y videos (mi propio Google Photos) }
+      - {
+          name: file-browser,
+          description: gestor de archivos web para acceder y compartir archivos,
+        }
+      - { name: crafty, description: ejecuta y administra servidores de Minecraft }
+rice:
+  text: Antes de pasarme a Noctalia, hice mi propio rice para aprender cómo se arma un escritorio con Hyprland
+  name: crimson-mocha-dots
+  url: https://github.com/dalo-dev/crimson-mocha-dots
+  theme: Catppuccin Mocha Red
+ask: Pregúntame sobre Linux, ricing, self-hosting… o por qué uso Hyprland.

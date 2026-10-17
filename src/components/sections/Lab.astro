@@ -1,0 +1,186 @@
+---
+import Section from '../Section.astro';
+import TerminalWindow from '../terminal/TerminalWindow.astro';
+import { profile } from '../../data/site';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+import { getLab } from '../../lib/content';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const { machines, rice, ask } = await getLab(lang);
+// neofetch's colour blocks, in the site palette (minus the window's own background).
+const swatches = ['#161a20', '#262b33', '#5d6672', '#9aa3ae', '#c3c8cf', '#e6e8eb', '#6fb3b8'];
+---
+
+<Section id="lab" title={t('lab.title')} command="neofetch">
+	<div class="lab">
+		{machines.map((machine) => (
+			<TerminalWindow title={machine.command} class="lab__machine" data-reveal-item>
+				<div class="fetch">
+					<p class="fetch__title">
+						<span class="fetch__accent">{profile.handle}</span>@
+						<span class="fetch__accent">{machine.hostname}</span>
+					</p>
+					<p class="fetch__rule" aria-hidden="true">
+						{'-'.repeat(profile.handle.length + 1 + machine.hostname.length)}
+					</p>
+					<dl class="fetch__fields">
+						{machine.fields.map((field) => (
+							<div class="fetch__row">
+								<dt>{field.key}:</dt>
+								<dd>{field.value}</dd>
+							</div>
+						))}
+					</dl>
+					{machine.services.length > 0 && (
+						<div class="fetch__services">
+							<p class="fetch__key">{t('lab.services')}:</p>
+							<dl>
+								{machine.services.map((service) => (
+									<div class="fetch__service">
+										<dt>{service.name}</dt>
+										<dd>{service.description}</dd>
+									</div>
+								))}
+							</dl>
+						</div>
+					)}
+					<p class="fetch__swatches" aria-hidden="true">
+						{swatches.map((color) => (
+							<span style={`background: ${color}`} />
+						))}
+					</p>
+				</div>
+			</TerminalWindow>
+		))}
+	</div>
+	{(rice || ask) && (
+		<div class="lab__notes" data-reveal-item>
+			{rice && (
+				<p>
+					<span class="glyph lab__hash" aria-hidden="true">
+						{'# '}
+					</span>
+					{rice.text}:{' '}
+					<a href={rice.url} rel="noopener">
+						{rice.name}
+					</a>{' '}
+					<span class="lab__muted">({rice.theme})</span>
+				</p>
+			)}
+			{ask && (
+				<p>
+					<span class="glyph lab__hash" aria-hidden="true">
+						{'# '}
+					</span>
+					{ask}
+				</p>
+			)}
+		</div>
+	)}
+</Section>
+
+<style>
+	.lab {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+		gap: var(--space-5);
+		align-items: start;
+	}
+
+	.fetch {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+		padding: var(--space-5);
+		font-size: var(--text-sm);
+	}
+
+	.fetch__title {
+		font-weight: 700;
+		color: var(--color-heading);
+	}
+
+	.fetch__accent {
+		color: var(--color-accent);
+	}
+
+	.fetch__rule {
+		color: var(--color-faint);
+		line-height: 1;
+		margin-bottom: var(--space-2);
+	}
+
+	.fetch__row {
+		display: flex;
+		gap: 1ch;
+	}
+
+	.fetch__row dt,
+	.fetch__key {
+		color: var(--color-accent);
+		font-weight: 700;
+	}
+
+	.fetch__services {
+		margin-top: var(--space-2);
+	}
+
+	.fetch__service {
+		display: grid;
+		grid-template-columns: 13ch minmax(0, 1fr);
+		column-gap: 1ch;
+		padding-left: 2ch;
+	}
+
+	.fetch__service dt {
+		color: var(--color-heading);
+	}
+
+	.fetch__service dd {
+		color: var(--color-muted);
+	}
+
+	.fetch__swatches {
+		display: flex;
+		margin-top: var(--space-4);
+	}
+
+	.fetch__swatches span {
+		width: 1.75rem;
+		height: 1rem;
+	}
+
+	.lab__notes {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+		margin-top: var(--space-6);
+		max-width: var(--prose-max);
+		font-size: var(--text-sm);
+	}
+
+	.lab__hash,
+	.lab__muted {
+		color: var(--color-muted);
+	}
+
+	.lab__notes a {
+		color: var(--color-accent);
+	}
+
+	.lab__notes a:hover {
+		color: var(--color-accent-hover);
+	}
+
+	@media (max-width: 30rem) {
+		.fetch__service {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+</style>

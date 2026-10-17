@@ -62,6 +62,27 @@ const now = defineCollection({
 	}),
 });
 
+/** The machines I run, shown as `neofetch` output: `lab/<lang>/lab.yaml`. */
+const lab = defineCollection({
+	loader: glob({ pattern: '*/lab.yaml', base: './src/content/lab' }),
+	schema: z.object({
+		machines: z
+			.array(
+				z.object({
+					hostname: z.string(),
+					command: z.string(),
+					fields: z.array(z.object({ key: z.string(), value: z.string() })).min(1),
+					services: z.array(z.object({ name: z.string(), description: z.string() })).default([]),
+				}),
+			)
+			.min(1),
+		rice: z
+			.object({ text: z.string(), name: z.string(), url: z.url(), theme: z.string() })
+			.optional(),
+		ask: z.string().optional(),
+	}),
+});
+
 /** Language-neutral; group labels are translated in `src/i18n/ui.ts`. */
 const skills = defineCollection({
 	loader: file('src/content/skills.yaml'),
@@ -72,4 +93,4 @@ const skills = defineCollection({
 	}),
 });
 
-export const collections = { experience, education, projects, now, skills };
+export const collections = { experience, education, projects, now, lab, skills };

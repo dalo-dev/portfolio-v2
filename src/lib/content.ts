@@ -1,7 +1,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { languages, type Lang } from '../i18n/ui';
 
-type LocalizedCollection = 'experience' | 'education' | 'projects' | 'now';
+type LocalizedCollection = 'experience' | 'education' | 'projects' | 'now' | 'lab';
 
 /** `en/birthdays-hub` → `birthdays-hub` */
 export function slugOf(entry: { id: string }): string {
@@ -62,6 +62,12 @@ export async function getProjects(lang: Lang) {
 export async function getNow(lang: Lang) {
 	const [entry] = await getLocalized('now', lang);
 	if (!entry) throw new Error(`[content] missing src/content/now/${lang}/now.yaml`);
+	return entry.data;
+}
+
+export async function getLab(lang: Lang) {
+	const [entry] = await getLocalized('lab', lang);
+	if (!entry) throw new Error(`[content] missing src/content/lab/${lang}/lab.yaml`);
 	return entry.data;
 }
 

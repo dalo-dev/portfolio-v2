@@ -1,0 +1,12 @@
+# What I'm focused on right now. Update `updated` whenever this changes.
+updated: 2026-10
+items:
+  - label: learning
+    text: Strengthening the web fundamentals — HTML, CSS, JavaScript and how the browser really works — instead of just stacking frameworks.
+  - label: studying
+    text: Exploring different branches of computer science on the way to a master's degree.
+  - label: homelab
+    text: Learning self-hosting and server administration on the ThinkPad in my closet.
+  - label: status
+    text: Open to remote frontend roles (US / LATAM / EU time zones).
+    highlight: true

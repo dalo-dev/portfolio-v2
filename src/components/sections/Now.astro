@@ -1,0 +1,70 @@
+---
+import Section from '../Section.astro';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+import { getNow } from '../../lib/content';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const { updated, items } = await getNow(lang);
+---
+
+<Section id="now" title={t('now.title')} command="cat now.txt">
+	<dl class="now">
+		{items.map((item) => (
+			<div class:list={['now__row', { 'now__row--highlight': item.highlight }]} data-reveal-item>
+				<dt class="now__label">
+					<span aria-hidden="true">[</span>
+					{item.label}
+					<span aria-hidden="true">]</span>
+				</dt>
+				<dd class="now__text">{item.text}</dd>
+			</div>
+		))}
+	</dl>
+	<p class="now__updated">
+		{t('now.updated')}: <time datetime={updated}>{updated}</time>
+	</p>
+</Section>
+
+<style>
+	.now {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+		max-width: var(--prose-max);
+	}
+
+	/* Fixed label column like log output; stacks on narrow screens. */
+	.now__row {
+		display: grid;
+		grid-template-columns: 14ch minmax(0, 1fr);
+		column-gap: var(--space-4);
+	}
+
+	.now__label {
+		color: var(--color-muted);
+		white-space: nowrap;
+	}
+
+	.now__row--highlight .now__label,
+	.now__row--highlight .now__text {
+		color: var(--color-accent);
+	}
+
+	.now__updated {
+		margin-top: var(--space-6);
+		font-size: var(--text-sm);
+		color: var(--color-muted);
+	}
+
+	@media (max-width: 30rem) {
+		.now__row {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+</style>

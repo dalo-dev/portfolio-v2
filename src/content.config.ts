@@ -45,6 +45,23 @@ const projects = defineCollection({
 	}),
 });
 
+/** "Now" page-in-a-section: one entry per language at `now/<lang>/now.yaml`. */
+const now = defineCollection({
+	loader: glob({ pattern: '*/now.yaml', base: './src/content/now' }),
+	schema: z.object({
+		updated: yearMonth,
+		items: z
+			.array(
+				z.object({
+					label: z.string().max(12),
+					text: z.string(),
+					highlight: z.boolean().default(false),
+				}),
+			)
+			.min(1),
+	}),
+});
+
 /** Language-neutral; group labels are translated in `src/i18n/ui.ts`. */
 const skills = defineCollection({
 	loader: file('src/content/skills.yaml'),
@@ -55,4 +72,4 @@ const skills = defineCollection({
 	}),
 });
 
-export const collections = { experience, education, projects, skills };
+export const collections = { experience, education, projects, now, skills };

@@ -1,0 +1,12 @@
+# En qué estoy enfocado ahora. Actualiza `updated` cada vez que cambie.
+updated: 2026-10
+items:
+  - label: aprendiendo
+    text: Reforzando los fundamentos de la web — HTML, CSS, JavaScript y cómo funciona realmente el navegador — en lugar de solo acumular frameworks.
+  - label: estudiando
+    text: Explorando distintas ramas de las ciencias de la computación de camino a una maestría.
+  - label: homelab
+    text: Aprendiendo self-hosting y administración de servidores con el ThinkPad de mi clóset.
+  - label: estado
+    text: Abierto a roles frontend remotos (zonas horarias de EE. UU., LATAM y Europa).
+    highlight: true

@@ -15,6 +15,7 @@ const en = {
 
 	'nav.label': 'Primary',
 	'nav.about': 'about',
+	'nav.now': 'now',
 	'nav.experience': 'experience',
 	'nav.projects': 'projects',
 	'nav.skills': 'skills',
@@ -43,6 +44,8 @@ const en = {
 	'about.p2':
 		'I specialize in translating complex business requirements into intuitive digital solutions while maintaining a quality-first approach throughout the software development lifecycle. I thrive in agile environments where technical excellence and system reliability are the core priorities.',
 	'about.photo.alt': 'Portrait of Daniel León',
+	'now.title': 'Now',
+	'now.updated': 'last updated',
 	'experience.title': 'Experience',
 	'experience.present': 'present',
 	'experience.stack': 'Tech stack',
@@ -86,6 +89,7 @@ const es: Record<UIKey, string> = {
 
 	'nav.label': 'Principal',
 	'nav.about': 'sobre-mi',
+	'nav.now': 'ahora',
 	'nav.experience': 'experiencia',
 	'nav.projects': 'proyectos',
 	'nav.skills': 'habilidades',
@@ -115,6 +119,8 @@ const es: Record<UIKey, string> = {
 	'about.p2':
 		'Me especializo en traducir requisitos de negocio complejos en soluciones digitales intuitivas, manteniendo un enfoque de calidad ante todo a lo largo del ciclo de vida del desarrollo de software. Prospero en entornos ágiles donde la excelencia técnica y la confiabilidad del sistema son las prioridades fundamentales.',
 	'about.photo.alt': 'Retrato de Daniel León',
+	'now.title': 'Ahora',
+	'now.updated': 'última actualización',
 	'experience.title': 'Experiencia',
 	'experience.present': 'presente',
 	'experience.stack': 'Tecnologías',

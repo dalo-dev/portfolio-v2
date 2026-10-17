@@ -7,7 +7,7 @@ test('home renders every section in English', async ({ page }) => {
 	await expect(page).toHaveTitle(/Daniel León/);
 	await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 	await expect(page.getByRole('heading', { level: 1 })).toHaveText('Daniel León');
-	for (const id of ['about', 'experience', 'projects', 'skills', 'education', 'contact']) {
+	for (const id of ['about', 'now', 'experience', 'projects', 'skills', 'education', 'contact']) {
 		await expect(page.locator(`section#${id}`)).toBeVisible();
 	}
 });

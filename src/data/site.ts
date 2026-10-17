@@ -18,6 +18,7 @@ export const cv: Record<Lang, string> = {
 /** Section anchors, shared by the nav and the home page. */
 export const sections = [
 	'about',
+	'now',
 	'experience',
 	'projects',
 	'skills',

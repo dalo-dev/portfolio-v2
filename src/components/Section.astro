@@ -10,22 +10,35 @@ interface Props {
 
 const { id, title, command, class: className } = Astro.props;
 const headingId = `${id}-title`;
+/** Optional `aside` slot: sits beside the whole section (prompt → content) on wide screens. */
+const hasAside = Astro.slots.has('aside');
 ---
 
 <section
 	id={id}
 	aria-labelledby={headingId}
-	class:list={['section container', className]}
+	class:list={['section container', { 'section--aside': hasAside }, className]}
 	data-reveal
 >
-	<Prompt command={command} />
+	<Prompt command={command} class="section__prompt" />
 	<h2 id={headingId} class="section__title">
 		<span aria-hidden="true" class="section__hash">
 			#{' '}
 		</span>
 		{title}
 	</h2>
-	<slot />
+	{hasAside ? (
+		<>
+			<div class="section__aside">
+				<slot name="aside" />
+			</div>
+			<div class="section__body">
+				<slot />
+			</div>
+		</>
+	) : (
+		<slot />
+	)}
 </section>
 
 <style>
@@ -40,5 +53,51 @@ const headingId = `${id}-title`;
 
 	.section__hash {
 		color: var(--color-muted);
+	}
+
+	/* Narrow: prompt, title, aside, body stacked. Wide: aside spans the full height on the right,
+	   top-aligned with the prompt (same rhythm as the hero's ASCII window). */
+	.section--aside {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-areas:
+			'prompt'
+			'title'
+			'aside'
+			'body';
+	}
+
+	.section--aside :global(.section__prompt) {
+		grid-area: prompt;
+	}
+
+	.section--aside .section__title {
+		grid-area: title;
+	}
+
+	.section__aside {
+		grid-area: aside;
+		margin-bottom: var(--space-8);
+	}
+
+	.section__body {
+		grid-area: body;
+		min-width: 0;
+	}
+
+	@media (min-width: 52rem) {
+		.section--aside {
+			grid-template-columns: minmax(0, 1fr) auto;
+			grid-template-rows: auto auto 1fr;
+			grid-template-areas:
+				'prompt aside'
+				'title aside'
+				'body aside';
+			column-gap: var(--space-12);
+		}
+
+		.section__aside {
+			margin-bottom: 0;
+		}
 	}
 </style>

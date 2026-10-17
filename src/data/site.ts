@@ -33,8 +33,8 @@ export const sections = [
 	'experience',
 	'projects',
 	'skills',
-	'lab',
 	'education',
+	'lab',
 	'contact',
 ] as const;
 

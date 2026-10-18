@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import localized404 from './integrations/localized-404.mjs';
 import securityHeaders from './integrations/security-headers.mjs';
 
 // https://astro.build/config
@@ -21,6 +22,7 @@ export default defineConfig({
 				locales: { en: 'en', es: 'es' },
 			},
 		}),
+		localized404(['es']),
 		securityHeaders(),
 	],
 	fonts: [

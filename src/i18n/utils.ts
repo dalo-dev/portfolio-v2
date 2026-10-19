@@ -5,11 +5,6 @@ export function isLang(value: string | undefined): value is Lang {
 	return !!value && value in languages;
 }
 
-export function getLangFromUrl(url: URL): Lang {
-	const [, segment] = url.pathname.split('/');
-	return isLang(segment) ? segment : defaultLang;
-}
-
 export function useTranslations(lang: Lang) {
 	return function t(key: UIKey): string {
 		return ui[lang][key] ?? ui[defaultLang][key];
@@ -25,8 +20,4 @@ export function localizePath(lang: Lang, path = ''): string {
 export function stripLangPrefix(pathname: string): string {
 	const [, segment, ...rest] = pathname.split('/');
 	return isLang(segment) && segment !== defaultLang ? rest.join('/') : pathname.slice(1);
-}
-
-export function otherLang(lang: Lang): Lang {
-	return lang === 'en' ? 'es' : 'en';
 }

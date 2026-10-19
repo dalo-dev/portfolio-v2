@@ -8,6 +8,8 @@ import securityHeaders from './integrations/security-headers.mjs';
 export default defineConfig({
 	site: 'https://dalo.dev',
 	output: 'static',
+	// Matches the default `directory` build format (every page is `<path>/index.html`).
+	trailingSlash: 'always',
 	i18n: {
 		defaultLocale: 'en',
 		locales: ['en', 'es'],

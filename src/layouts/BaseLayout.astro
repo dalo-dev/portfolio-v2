@@ -118,7 +118,7 @@ const terminalClear = {
 		<meta name="twitter:card" content="summary_large_image" />
 		{!noindex && <script type="application/ld+json" set:html={jsonLd} />}
 
-		<Font cssVariable="--font-mono" preload />
+		<Font cssVariable="--font-mono" preload={[{ subset: 'latin' }]} />
 		<MotionHead />
 		<ClientRouter />
 	</head>

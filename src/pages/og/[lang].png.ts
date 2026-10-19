@@ -4,7 +4,7 @@
  */
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
-import type { APIRoute, GetStaticPaths } from 'astro';
+import type { APIRoute, GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import satori from 'satori';
 import sharp from 'sharp';
 import { asciiLogo } from '../../data/ascii-logo';
@@ -117,10 +117,11 @@ function card(lang: Lang): Node {
 export const getStaticPaths = (() =>
 	(Object.keys(languages) as Lang[]).map((lang) => ({
 		params: { lang },
+		props: { lang },
 	}))) satisfies GetStaticPaths;
 
-export const GET: APIRoute = async ({ params }) => {
-	const svg = await satori(card(params.lang as Lang) as never, {
+export const GET: APIRoute<InferGetStaticPropsType<typeof getStaticPaths>> = async ({ props }) => {
+	const svg = await satori(card(props.lang) as never, {
 		width: WIDTH,
 		height: HEIGHT,
 		fonts: await fonts,

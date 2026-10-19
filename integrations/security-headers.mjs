@@ -24,15 +24,22 @@ async function htmlFiles(dir) {
 const INLINE_SCRIPT =
 	/<script(?![^>]*\bsrc=)(?![^>]*type="application\/(?:ld\+)?json")[^>]*>([\s\S]*?)<\/script>/g;
 
+/**
+ * Cloudflare Web Analytics: the beacon script is injected at the edge (not in our HTML) and
+ * reports to its own origin.
+ */
+const CF_ANALYTICS_SCRIPT = 'https://static.cloudflareinsights.com';
+const CF_ANALYTICS_REPORT = 'https://cloudflareinsights.com';
+
 /** @param {string[]} scriptHashes */
 export function buildCsp(scriptHashes) {
 	return [
 		"default-src 'self'",
-		`script-src 'self' ${scriptHashes.map((h) => `'${h}'`).join(' ')}`.trim(),
+		`script-src 'self' ${CF_ANALYTICS_SCRIPT} ${scriptHashes.map((h) => `'${h}'`).join(' ')}`.trim(),
 		"style-src 'self' 'unsafe-inline'",
 		"img-src 'self' data:",
 		"font-src 'self'",
-		"connect-src 'self'",
+		`connect-src 'self' ${CF_ANALYTICS_REPORT}`,
 		"object-src 'none'",
 		"base-uri 'self'",
 		"form-action 'self'",

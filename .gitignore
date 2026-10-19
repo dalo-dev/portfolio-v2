@@ -29,3 +29,6 @@ test-results/
 
 # lighthouse
 .lighthouseci/
+
+# wrangler (local `wrangler dev` state)
+.wrangler/

@@ -1,0 +1,12 @@
+// Cloudflare Workers static assets: serves the Astro build as-is (no Worker script, no adapter).
+// `_headers` in dist/ (written by integrations/security-headers.mjs) is applied automatically.
+{
+	"name": "portfolio-v2",
+	"compatibility_date": "2026-10-01",
+	"assets": {
+		"directory": "./dist",
+		// Serve the nearest 404.html with a 404 status: /es/<missing> gets dist/es/404.html.
+		"not_found_handling": "404-page",
+		"html_handling": "auto-trailing-slash",
+	},
+}
